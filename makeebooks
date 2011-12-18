@@ -47,7 +47,7 @@ ARGV.each do |lang|
     output.write(book_content)
   end
 
-  system('ebook-convert', "progit.#{lang}.html", "progit.#{lang}.#{format}",
+  system('xvfb-run', 'ebook-convert', "progit.#{lang}.html", "progit.#{lang}.#{format}",
          '--cover', 'ebooks/cover.png',
          '--authors', 'Scott Chacon',
          '--comments', "licensed under the Creative Commons Attribution-Non Commercial-Share Alike 3.0 license",
