@@ -60,6 +60,9 @@ end
 
 def pre_pandoc(string, config)
 	replace(string) do
+		# avoid #### subsubsections #### replacement
+		s /\#\#\#\#\# (.*?) \#\#\#\#\#/, '\\paragraph{\1}'
+
 		# Pandoc discards #### subsubsections #### - this hack recovers them
 		s /\#\#\#\# (.*?) \#\#\#\#/, 'SUBSUBSECTION: \1'
 
