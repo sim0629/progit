@@ -131,7 +131,7 @@ figures do
 
 		puts "#{lang}:"
 		markdown = Dir["#$root/#{lang}/*/*.markdown"].sort.map do |file|
-			File.read(file)
+			File.read(file) if not "#{file}".include? '00-preface'
 		end.join("\n\n")
 
 		print "\tParsing markdown... "
