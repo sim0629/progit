@@ -108,6 +108,9 @@ def post_pandoc(string, config)
 
 		# Shaded verbatim block
 		s /(\\begin\{verbatim\}.*?\\end\{verbatim\})/m, '\begin{shaded}\1\end{shaded}'
+
+		# Caret for Korean
+		s /\\\^\{\}/, '{\textasciicircum}'
 	end
 end
 
