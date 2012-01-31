@@ -1,9 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml"><head><meta charset="utf-8" /><title>Pro Git - professional version control</title></head><body><h1>번역</h1>
-
-<p>안녕하세요. 한국어 번역은 박창우(pismute@gmail.com), 이성환(lethee@gmail.com)이 하였습니다. 오역 등의 개선 사항은 역자의 메일로 보내주시거나 한국어 번역 게시판에 <code>https://github.com/dogfeet/progit/issues</code>에 남겨주시기 바랍니다. 직접 개선해서 패치나 Pull Request를 보내주셔도 됩니다.</p>
-
-<p>여러분 모두 Git으로 힘내시기 바랍니다.</p>
-<h1>시작하기</h1>
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta charset="utf-8" /><title>Pro Git - professional version control</title></head><body><h1>시작하기</h1>
 
 <p>이 장에서는 처음 접하는 사람들에게 Git을 설명한다. 먼저 버전 관리 도구에 대한 이해를, 그리고 Git을 설치하는 방법을, 마지막으로 Git 서버를 설정하고 사용하는 방법을 설명한다. 이 장을 다 읽고 나면 Git의 탄생 배경, Git을 사용하는 이유, Git을 설정하고 사용하는 방법을 터득할 것이다.</p>
 
@@ -19,7 +14,7 @@
 
 <p>이런 이유로 프로그래머들은 오래전에 로컬 VCS를 만들었다. 그 VCS는 관리 중인 파일의 변경 정보를 저장하려고 아주 간단한 데이터베이스를 사용했다.</p>
 
-<p><img src="figures/18333fig0101-tn.png" title="1-1. 로컬 버전 관리 다이어그램." alt="1-1. 로컬 버전 관리 다이어그램." /></p>
+<p><img src="figures/18333fig0101-tn.png" title="1-1. 로컬 버전 관리 다이어그램." alt="1-1. 로컬 버전 관리 다이어그램." /><br /><span class="image-title" style="font-weight:bold;">1-1. 로컬 버전 관리 다이어그램.</span></p>
 
 <p>많이 쓰는 VCS 도구 중에 rcs라고 부르는 것이 있는데 오늘날까지도 아직 많은 회사가 사용하고 있다. Mac OS X 운영체제에서도 개발 도구를 설치하면 RCS가 함께 설치된다. RCS는 기본적으로 Patch Set(파일에서 변경되는 부분)을 관리한다. 이 Patch Set은 특별한 형식의 파일로 저장한다. 그리고 일련의 Patch Set을 적용해서 모든 파일을 특정 시점으로 되돌릴 수 있다.</p>
 
@@ -27,17 +22,17 @@
 
 <p>프로젝트를 진행하다 보면 다른 개발자와 함께 작업해야 하는 경우가 많다. 이럴 때 생기는 문제를 해결하기 위해 CVCS(Centralized Version Control System)가 개발됐다. CVS, Subversion, Perforce 같은 시스템은 모든 파일을 관리하는 서버가 별도로 있고 많은 클라이언트가 중앙 서버에서 파일을 받아서 사용(Checkout)한다. 수년 동안 이러한 시스템들이 많은 사랑을 받았다.</p>
 
-<p><img src="figures/18333fig0102-tn.png" title="1-2. 중앙집중식 버전 관리 (CVCS) 다이어그램." alt="1-2. 중앙집중식 버전 관리 (CVCS) 다이어그램." /></p>
+<p><img src="figures/18333fig0102-tn.png" title="1-2. 중앙집중식 버전 관리 (CVCS) 다이어그램." alt="1-2. 중앙집중식 버전 관리 (CVCS) 다이어그램." /><br /><span class="image-title" style="font-weight:bold;">1-2. 중앙집중식 버전 관리 (CVCS) 다이어그램.</span></p>
 
-<p>CVCS 환경은 로컬 VCS에 비해 장점이 많다. 프로젝트에 참여한 사람이면 누가 무엇을 하고 있는지 알 수 있다. 관리자는 누가 무엇을 할 수 있는지 꼼꼼하게 관리할 수 있다. 모든 클라이언트의 로컬 데이터페이스를 관리하는 것보다 CVS 하나를 관리하기가 훨씬 쉽다.</p>
+<p>CVCS 환경은 로컬 VCS에 비해 장점이 많다. 프로젝트에 참여한 사람이면 누가 무엇을 하고 있는지 알 수 있다. 관리자는 누가 무엇을 할 수 있는지 꼼꼼하게 관리할 수 있다. 모든 클라이언트의 로컬 데이터베이스를 관리하는 것보다 VCS 하나를 관리하기가 훨씬 쉽다.</p>
 
 <p>그러나 CVCS 환경은 몇 가지 치명적인 결점이 있다. 가장 대표적인 것이 중앙 서버에 발생한 문제다. 만약 서버가 한 시간 동안 다운되면 그동안 아무도 다른 사람과 협업할 수 없고 사람들이 하는 일을 백업할 방법도 없다. 그리고 중앙 데이터베이스가 있는 하드디스크에 문제가 생기면 프로젝트의 모든 히스토리를 잃는다. 물론 사람마다 하나씩 가진 Snapshot은 괜찮다. 로컬 VCS 시스템도 이와 비슷한 결점이 있고 이런 문제가 발생하면 모든 것을 잃는다.</p>
 
 <h3>분산형 버전 관리 시스템(Distributed VCS)</h3>
 
-<p>분산형 버전 관리 시스템(DVCS)을 설명할 차례다. Git, Mecurial, Bazaar, Dearcs 같은 DVCS에서는 클라이언트가 파일의 마지막 Snapshot을 Checkout 하지 않는다. 그냥 저장소를 전부 복제한다. 서버에 문제가 생기면 이 복제물로 다시 작업을 시작할 수 있다. 클라이언트 중에서 아무거나 골라도 서버를 복원할 수 있다. 모든 Checkout은 모든 데이터를 가진 진정한 백업이다.</p>
+<p>분산형 버전 관리 시스템(DVCS)을 설명할 차례다. Git, Mecurial, Bazaar, Darcs 같은 DVCS에서는 클라이언트가 파일의 마지막 Snapshot을 Checkout 하지 않는다. 그냥 저장소를 전부 복제한다. 서버에 문제가 생기면 이 복제물로 다시 작업을 시작할 수 있다. 클라이언트 중에서 아무거나 골라도 서버를 복원할 수 있다. 모든 Checkout은 모든 데이터를 가진 진정한 백업이다.</p>
 
-<p><img src="figures/18333fig0103-tn.png" title="1-3. 분산형 버전 관리 시스템(DVCS) 다이어그램." alt="1-3. 분산형 버전 관리 시스템(DVCS) 다이어그램." /></p>
+<p><img src="figures/18333fig0103-tn.png" title="1-3. 분산형 버전 관리 시스템(DVCS) 다이어그램." alt="1-3. 분산형 버전 관리 시스템(DVCS) 다이어그램." /><br /><span class="image-title" style="font-weight:bold;">1-3. 분산형 버전 관리 시스템(DVCS) 다이어그램.</span></p>
 
 <p>게다가 대부분의 DVCS 환경에서는 리모트 저장소가 존재할 수 있다. 리모트 저장소가 많다고 해도 문제없다. 그래서 사람들은 동시에 다양한 그룹과 다양한 방법으로 협업할 수 있다. 계층 모델 같은 중앙집중식 시스템으로는 할 수 없는 몇 가지 워크플로우도 사용할 수 있다.</p>
 
@@ -66,11 +61,11 @@
 
 <p>Subversion과 Subversion 비슷한 놈들과 Git의 가장 큰 차이점은 데이터를 다루는 방법에 있다. 큰 틀에서 봤을 때 대부분의 VCS 시스템이 관리하는 정보는 파일들의 목록이다. CVS, Subversion, Perforce, Bazaar 등의 시스템은 파일의 집합으로 정보를 관리한다. 각 파일의 변화를 그림 1-4처럼 시간순으로 관리한다.</p>
 
-<p><img src="figures/18333fig0104-tn.png" title="1-4. 각 파일에 대한 변화(차이점)를 저장하는 시스템들." alt="1-4. 각 파일에 대한 변화(차이점)를 저장하는 시스템들." /></p>
+<p><img src="figures/18333fig0104-tn.png" title="1-4. 각 파일에 대한 변화(차이점)를 저장하는 시스템들." alt="1-4. 각 파일에 대한 변화(차이점)를 저장하는 시스템들." /><br /><span class="image-title" style="font-weight:bold;">1-4. 각 파일에 대한 변화(차이점)를 저장하는 시스템들.</span></p>
 
 <p>Git은 이런 식으로 데이터를 저장하지도 취급하지도 않는다. 대신 Git의 데이터는 파일 시스템의 Snapshot이라 할 수 있으며 크기가 아주 작다. Git은 Commit 하거나 프로젝트의 상태를 저장할 때마다 파일이 존재하는 그 순간을 중요하게 여긴다. 파일이 달라지지 않았으면 Git은 성능을 위해서 파일을 저장하지 않는다. 단지 이전 상태의 파일에 대한 링크만 저장한다. Git은 그림 1-5처럼 동작한다.</p>
 
-<p><img src="figures/18333fig0105-tn.png" title="1-5. Git은 시간순으로 프로젝트의 Snapshot을 저장한다." alt="1-5. Git은 시간순으로 프로젝트의 Snapshot을 저장한다." /></p>
+<p><img src="figures/18333fig0105-tn.png" title="1-5. Git은 시간순으로 프로젝트의 Snapshot을 저장한다." alt="1-5. Git은 시간순으로 프로젝트의 Snapshot을 저장한다." /><br /><span class="image-title" style="font-weight:bold;">1-5. Git은 시간순으로 프로젝트의 Snapshot을 저장한다.</span></p>
 
 <p>이것이 Git이 다른 VCS와 구분되는 점이다. 이점 때문에 Git는 다른 시스템들이 과거로부터 답습해왔던 버전 컨트롤의 개념의 많은 부분을 새로운 관점에서 바라본다. Git은 강력한 도구를 지원하는 작은 파일시스템이다. Git은 단순한 VCS가 아니다. 이제 3장에서 설명할 Git 브랜치를 사용하면 얻게 되는 이득이 무엇인지 설명한다.</p>
 
@@ -105,7 +100,7 @@
 
 <p>이 세 가지 상태는 Git 프로젝트의 세 가지 단계와 연결돼 있다. Git Directory, Working Directory, Staging Area 이 세 가지 단계를 이해하고 넘어가자.</p>
 
-<p><img src="figures/18333fig0106-tn.png" title="1-5. Working Directory, Staging Area, Git Directory" alt="1-5. Working Directory, Staging Area, Git Directory" /></p>
+<p><img src="figures/18333fig0106-tn.png" title="1-5. Working Directory, Staging Area, Git Directory" alt="1-5. Working Directory, Staging Area, Git Directory" /><br /><span class="image-title" style="font-weight:bold;">1-5. Working Directory, Staging Area, Git Directory</span></p>
 
 <p>Git Directory는 Git이 프로젝트의 메타데이터와 객체 데이터베이스를 저장하는 곳을 말한다. Git Directory가 Git의 핵심이다. 다른 컴퓨터에 있는 저장소를 Clone 할 때 Git Directory가 만들어진다.</p>
 
@@ -178,7 +173,7 @@ $ sudo make prefix=/usr/local install
 <pre><code>http://code.google.com/p/git-osx-installer
 </code></pre>
 
-<p><img src="figures/18333fig0107-tn.png" title="1-7. OS X Git 인스톨러." alt="1-7. OS X Git 인스톨러." /></p>
+<p><img src="figures/18333fig0107-tn.png" title="1-7. OS X Git 인스톨러." alt="1-7. OS X Git 인스톨러." /><br /><span class="image-title" style="font-weight:bold;">1-7. OS X Git 인스톨러.</span></p>
 
 <p>MacPorts(<code>http://www.macports.org</code>)를 사용하는 방법도 있다. MacPorts가 설치돼 있으면 다음과 같이 Git을 설치한다:</p>
 
@@ -330,7 +325,7 @@ $ git commit -m 'initial project version'
 
 <p>마지막 커밋 이후 아직 아무것도 수정하지 않은 상태에서 어떤 파일이 수정되면 Git은 그 즉시 파일을 Modified 상태로 인식한다. 그리고 이 수정한 파일을 Stage하고 Staged 상태인 파일들을 커밋한다. 이 라이프사이클을 그림 2-1처럼 계속 반복한다.</p>
 
-<p><img src="figures/18333fig0201-tn.png" title="2-1. 파일의 라이프사이클" alt="2-1. 파일의 라이프사이클" /></p>
+<p><img src="figures/18333fig0201-tn.png" title="2-1. 파일의 라이프사이클" alt="2-1. 파일의 라이프사이클" /><br /><span class="image-title" style="font-weight:bold;">2-1. 파일의 라이프사이클</span></p>
 
 <h3>파일의 상태 확인하기</h3>
 
@@ -685,7 +680,7 @@ $ git status
 <pre><code>$ git rm log/\*.log
 </code></pre>
 
-<p><code>*</code>앞에 <code>\</code>을 사용한 것을 기억하자. 쉘의 확장자도 그렇지만 Git의 파일 확장자에서도 <code>\</code>는 필요하다. 이 명령은 <code>log/</code> 디렉토리에 있는 <code>.log</code> 파일을 모두 삭제한다. 다음의 예제처럼 할 수도 있다:</p>
+<p><code>*</code>앞에 <code>\</code>을 사용한 것을 기억하자. 이것은 쉘의 파일명 확장에 더하여 Git 자체의 파일명 확장 기능을 사용하기 위해서이다. 이 명령은 <code>log/</code> 디렉토리에 있는 <code>.log</code> 파일을 모두 삭제한다. 다음의 예제처럼 할 수도 있다:</p>
 
 <pre><code>$ git rm \*~
 </code></pre>
@@ -696,7 +691,7 @@ $ git status
 
 <p>Git은 다른 VCS 시스템과는 달리 파일 이름의 변경이나 파일의 이동을 명시적으로 관리하지 않는다. 다시 말해서 파일 이름이 변경됐다는 별도의 정보를 저장하지 않는다. Git은 똑똑해서 굳이 파일 이름이 변경되었다는 것을 추적하지 않아도 아는 방법이 있다. 이제 Git이 파일의 이름이 변경된 것을 어떻게 알아내는지 살펴본다.</p>
 
-<p>이렇게 말해고 Git에 <code>mv</code> 명령이 있는 게 좀 이상하겠지만, 다음과 같이 파일이름을 변경할 수 있다:</p>
+<p>이렇게 말하고 Git에 <code>mv</code> 명령이 있는 게 좀 이상하겠지만, 다음과 같이 파일이름을 변경할 수 있다:</p>
 
 <pre><code>$ git mv file_from file_to
 </code></pre>
@@ -947,7 +942,7 @@ b0ad11e - pull: allow "git pull origin $something:$cur
 
 <p>GUI 도구로 커밋 히스토리를 시각화하고 싶다면 gitk를 사용할 수 있다. gitk는 Tcl/Tk 프로그램이고 <code>git log</code> 명령을 시각화해주는 도구다. gitk는 <code>git log</code> 명령이 지원하는 필터링 옵션을 거의 모두 지원한다. 프로젝트 디렉토리에서 gitk를 실행하면 그림 2-2처럼 보일 것이다.</p>
 
-<p><img src="figures/18333fig0202-tn.png" title="2-2. gitk의 히스토리" alt="2-2. gitk의 히스토리" /></p>
+<p><img src="figures/18333fig0202-tn.png" title="2-2. gitk의 히스토리" alt="2-2. gitk의 히스토리" /><br /><span class="image-title" style="font-weight:bold;">2-2. gitk의 히스토리</span></p>
 
 <p>위쪽 반을 차지하는 윈도우에서는 히스토리를 그래프로 예쁘게 보여준다. 아래쪽 반을 차지하는 윈도우는 diff 결과를 보여주는데 위쪽 윈도우에서 선택한 커밋에 대한 diff 결과를 보여준다.</p>
 
@@ -1427,7 +1422,7 @@ To git@github.com:schacon/simplegit.git
 
 <p>윈도우에 msysGit을 설치해서 Git Bash를 사용하는 경우에는 자동완성이 미리 설정되어 있다.</p>
 
-<p>Git 명령을 입력할 때 <Tab> 키를 누르면 Git이 제안하는 명령들이 출력된다:</p>
+<p>Git 명령을 입력할 때 <code>&lt;Tab&gt;</code> 키를 누르면 Git이 제안하는 명령들이 출력된다:</p>
 
 <pre><code>$ git co&lt;tab&gt;&lt;tab&gt;
 commit config
@@ -1515,15 +1510,15 @@ $ git commit -m 'initial commit of my project'
 
 <p>이 작업을 마치고 나면 Git 저장소에는 다섯 개의 데이터 개체가 생긴다. 각 파일에 대한 Blob 세 개, 파일과 디렉토리 구조가 들어 있는 트리 개체 하나, 메타데이터와 루트 트리를 가리키는 포인터가 담긴 커밋 개체 하나이다. 이것을 그림으로 그리면 그림 3-1과 같다.</p>
 
-<p><img src="figures/18333fig0301-tn.png" title="3-1. 저장소의 커밋 데이터." alt="3-1. 저장소의 커밋 데이터." /></p>
+<p><img src="figures/18333fig0301-tn.png" title="3-1. 저장소의 커밋 데이터." alt="3-1. 저장소의 커밋 데이터." /><br /><span class="image-title" style="font-weight:bold;">3-1. 저장소의 커밋 데이터.</span></p>
 
 <p>다시 파일을 수정하고 커밋을 하면 이전 커밋이 무엇인지도 저장한다. 커밋을 두 번 더 하면 그림 3-2과 같이 저장돼 있을 것이다.</p>
 
-<p><img src="figures/18333fig0302-tn.png" title="3-2. Git 커밋의 개체 데이터." alt="3-2. Git 커밋의 개체 데이터." /></p>
+<p><img src="figures/18333fig0302-tn.png" title="3-2. Git 커밋의 개체 데이터." alt="3-2. Git 커밋의 개체 데이터." /><br /><span class="image-title" style="font-weight:bold;">3-2. Git 커밋의 개체 데이터.</span></p>
 
 <p>Git의 브랜치는 커밋 사이를 가볍게 이동할 수 있는 어떤 포인터 같은 것이다. 기본적으로 Git은 master 브랜치를 만든다. 최초로 커밋하면 Git은 master라는 이름의 브랜치를 만들어서 자동으로 가장 마지막 커밋을 가리키게 한다.</p>
 
-<p><img src="figures/18333fig0303-tn.png" title="3-3. 가장 최근 커밋 정보를 가리키는 브랜치." alt="3-3. 가장 최근 커밋 정보를 가리키는 브랜치." /></p>
+<p><img src="figures/18333fig0303-tn.png" title="3-3. 가장 최근 커밋 정보를 가리키는 브랜치." alt="3-3. 가장 최근 커밋 정보를 가리키는 브랜치." /><br /><span class="image-title" style="font-weight:bold;">3-3. 가장 최근 커밋 정보를 가리키는 브랜치.</span></p>
 
 <p>브랜치를 하나 새로 만들면 어떨까? 브랜치를 하나 만들어서 놀자. 다음과 같이 <code>git branch</code> 명령으로 testing 브랜치를 만든다.</p>
 
@@ -1532,11 +1527,11 @@ $ git commit -m 'initial commit of my project'
 
 <p>새로 만든 브랜치도 지금 작업하고 있던 마지막 커밋을 가리킨다(그림 3-4).</p>
 
-<p><img src="figures/18333fig0304-tn.png" title="3-3. 커밋 개체를 가리키는 두 브랜치" alt="3-3. 커밋 개체를 가리키는 두 브랜치" /></p>
+<p><img src="figures/18333fig0304-tn.png" title="3-3. 커밋 개체를 가리키는 두 브랜치" alt="3-3. 커밋 개체를 가리키는 두 브랜치" /><br /><span class="image-title" style="font-weight:bold;">3-3. 커밋 개체를 가리키는 두 브랜치</span></p>
 
 <p>지금 작업 중인 브랜치가 무엇인지 Git은 어떻게 파악할까? 다른 버전 관리 시스템과는 달리 Git은 'HEAD'라는 특수한 포인터가 있다. 이 포인터는 지금 작업하는 로컬 브랜치를 가리킨다. 브랜치를 새로 만들었지만, Git은 아직 master 브랜치를 가리키고 있다. <code>git branch</code> 명령은 브랜치를 만들기만 하고 브랜치를 옮기지 않는다.</p>
 
-<p><img src="figures/18333fig0305-tn.png" title="3-1. HEAD는 현재 작업 중인 브랜치를 가리킴." alt="3-1. HEAD는 현재 작업 중인 브랜치를 가리킴." /></p>
+<p><img src="figures/18333fig0305-tn.png" title="3-1. HEAD는 현재 작업 중인 브랜치를 가리킴." alt="3-1. HEAD는 현재 작업 중인 브랜치를 가리킴." /><br /><span class="image-title" style="font-weight:bold;">3-1. HEAD는 현재 작업 중인 브랜치를 가리킴.</span></p>
 
 <p><code>git checkout</code> 명령으로 새로 만든 브랜치로 이동할 수 있다. testing 브랜치로 이동하려면 다음과 같이 한다:</p>
 
@@ -1545,7 +1540,7 @@ $ git commit -m 'initial commit of my project'
 
 <p>이렇게 하면 HEAD는 testing 브랜치를 가리킨다.</p>
 
-<p><img src="figures/18333fig0306-tn.png" title="3-6. HEAD는 옮겨간 다른 브랜치를 가리킨다." alt="3-6. HEAD는 옮겨간 다른 브랜치를 가리킨다." /></p>
+<p><img src="figures/18333fig0306-tn.png" title="3-6. HEAD는 옮겨간 다른 브랜치를 가리킨다." alt="3-6. HEAD는 옮겨간 다른 브랜치를 가리킨다." /><br /><span class="image-title" style="font-weight:bold;">3-6. HEAD는 옮겨간 다른 브랜치를 가리킨다.</span></p>
 
 <p>자, 이제 핵심이 보일 거다! 커밋을 새로 한 번 해보면:</p>
 
@@ -1555,7 +1550,7 @@ $ git commit -a -m 'made a change'
 
 <p>결과는 그림 3-7과 같다.</p>
 
-<p><img src="figures/18333fig0307-tn.png" title="3-7. HEAD가 새 커밋을 가리키는 testing 브랜치의 모습" alt="3-7. HEAD가 새 커밋을 가리키는 testing 브랜치의 모습" /></p>
+<p><img src="figures/18333fig0307-tn.png" title="3-7. HEAD가 새 커밋을 가리키는 testing 브랜치의 모습" alt="3-7. HEAD가 새 커밋을 가리키는 testing 브랜치의 모습" /><br /><span class="image-title" style="font-weight:bold;">3-7. HEAD가 새 커밋을 가리키는 testing 브랜치의 모습</span></p>
 
 <p>이 부분이 흥미롭다. 새로 커밋해서 testing 브랜치는 앞으로 이동했다. 하지만, master 브랜치는 여전히 이전 커밋을 가리킨다. master 브랜치로 되돌아가면:</p>
 
@@ -1564,7 +1559,7 @@ $ git commit -a -m 'made a change'
 
 <p>결과는 그림 3-8과 같다.</p>
 
-<p><img src="figures/18333fig0308-tn.png" title="3-8. HEAD가 Checkout한 브랜치로 이동함" alt="3-8. HEAD가 Checkout한 브랜치로 이동함" /></p>
+<p><img src="figures/18333fig0308-tn.png" title="3-8. HEAD가 Checkout한 브랜치로 이동함" alt="3-8. HEAD가 Checkout한 브랜치로 이동함" /><br /><span class="image-title" style="font-weight:bold;">3-8. HEAD가 Checkout한 브랜치로 이동함</span></p>
 
 <p>방금 실행한 명령이 한 일은 두 가지다. master 브랜치가 가리키는 커밋을 HEAD가 가리키게 하고 Working Directory의 파일도 그 시점으로 되돌려 놓았다. 앞으로 커밋을 하면 다른 브랜치의 작업들과 별개로 진행되기 때문에 testing 브랜치에서 임시로 작업해도 원래 master 브랜치로 돌아와서 하던 일을 계속할 수 있다.</p>
 
@@ -1576,11 +1571,11 @@ $ git commit -a -m 'made other changes'
 
 <p>프로젝트 히스토리는 분리돼 진행한다(그림 3-9). 우리는 브랜치를 하나 만들어 그 브랜치에서 일을 좀 하고, 다시 원래 브랜치로 되돌아와서 다른 일을 했다. 각 두 작업 내용은 서로 독립적으로 각 브랜치에 존재한다. 커밋 사이를 자유롭게 이동하다가 때가 되면 두 브랜치를 Merge한다. 간단히 <code>branch</code>와 <code>checkout</code> 명령을 써서 말이다.</p>
 
-<p><img src="figures/18333fig0309-tn.png" title="3-9. 브랜치 히스토리가 서로 독립적임" alt="3-9. 브랜치 히스토리가 서로 독립적임" /></p>
+<p><img src="figures/18333fig0309-tn.png" title="3-9. 브랜치 히스토리가 서로 독립적임" alt="3-9. 브랜치 히스토리가 서로 독립적임" /><br /><span class="image-title" style="font-weight:bold;">3-9. 브랜치 히스토리가 서로 독립적임</span></p>
 
 <p>실제로 Git의 브랜치는 어떤 한 커밋을 가리키는 40글자의 SHA-1 체크섬 파일에 불과하기 때문에 만들기도 지우기도 어렵지 않다. 새로 브랜치를 하나 만드는 것은 41바이트 크기의 파일을(40자와 줄 바꿈 문자) 하나 만드는 것에 불과하다.</p>
 
-<p>브랜치를 만들려면 프로젝트를 통째로 복사해야 하는 다른 버전 관리 도구와 Git의 차이를 극명하다. 통째로 복사하는 작업은 프로젝트 크기에 따라 다르겠지만 수십 초에서 수십 분까지 걸린다. 그에 비해 Git은 순식간이다. 게다가 커밋을 할 때마다 이전 커밋의 정보를 저장하기 때문에 Merge할 때 어디서부터(Merge Base) 합쳐야 하는지 안다. 이런 특징은 개발자들이 수시로 브랜치를 만들어 사용하게 한다.</p>
+<p>브랜치를 만들려면 프로젝트를 통째로 복사해야 하는 다른 버전 관리 도구와 Git의 차이는 극명하다. 통째로 복사하는 작업은 프로젝트 크기에 따라 다르겠지만 수십 초에서 수십 분까지 걸린다. 그에 비해 Git은 순식간이다. 게다가 커밋을 할 때마다 이전 커밋의 정보를 저장하기 때문에 Merge할 때 어디서부터(Merge Base) 합쳐야 하는지 안다. 이런 특징은 개발자들이 수시로 브랜치를 만들어 사용하게 한다.</p>
 
 <p>이제 왜 그렇게 브랜치를 수시로 만들고 사용해야 하는지 알아보자.</p>
 
@@ -1609,7 +1604,7 @@ $ git commit -a -m 'made other changes'
 
 <p>먼저 커밋을 몇 번 했다고 가정하자.</p>
 
-<p><img src="figures/18333fig0310-tn.png" title="3-10. 현재 커밋 히스토리" alt="3-10. 현재 커밋 히스토리" /></p>
+<p><img src="figures/18333fig0310-tn.png" title="3-10. 현재 커밋 히스토리" alt="3-10. 현재 커밋 히스토리" /><br /><span class="image-title" style="font-weight:bold;">3-10. 현재 커밋 히스토리</span></p>
 
 <p>이슈 관리 시스템에 등록된 53번 이슈를 처리한다고 하면 이 이슈에 집중할 수 있는 브랜치를 새로 하나 만든다. Git은 어떤 이슈 관리 시스템에도 종속돼 있지 않다. 브랜치를 만들면서 Checkout까지 한 번에 하려면 <code>git checkout</code> 명령에 <code>-b</code>라는 옵션을 준다.</p>
 
@@ -1625,7 +1620,7 @@ $ git checkout iss53
 
 <p>그림 3-11은 위 명령의 결과를 나타낸다.</p>
 
-<p><img src="figures/18333fig0311-tn.png" title="3-11. 브랜치 포인터를 새로 만듦" alt="3-11. 브랜치 포인터를 새로 만듦" /></p>
+<p><img src="figures/18333fig0311-tn.png" title="3-11. 브랜치 포인터를 새로 만듦" alt="3-11. 브랜치 포인터를 새로 만듦" /><br /><span class="image-title" style="font-weight:bold;">3-11. 브랜치 포인터를 새로 만듦</span></p>
 
 <p>iss53 브랜치를 Checkout했기 때문에(즉, HEAD는 iss53 브랜치를 가리킨다) 뭔가 일을 하고 커밋하면 iss53 브랜치가 앞으로 진행한다:</p>
 
@@ -1633,7 +1628,7 @@ $ git checkout iss53
 $ git commit -a -m 'added a new footer [issue 53]'
 </code></pre>
 
-<p><img src="figures/18333fig0312-tn.png" title="3-12. 진행 중인 iss53 브랜치" alt="3-12. 진행 중인 iss53 브랜치" /></p>
+<p><img src="figures/18333fig0312-tn.png" title="3-12. 진행 중인 iss53 브랜치" alt="3-12. 진행 중인 iss53 브랜치" /><br /><span class="image-title" style="font-weight:bold;">3-12. 진행 중인 iss53 브랜치</span></p>
 
 <p>다른 상황을 가정해보자. 만드는 사이트에 문제가 생겨서 즉시 고쳐야 한다. 버그를 해결한 Hotfix에 'iss53'이 섞이는 것을 방지하기 위해 'iss53'와 관련된 코드를 어딘가에 저장해두고 원래 운영 환경의 소스로 복구해야 한다. Git을 사용하면 이런 노력을 들일 필요 없이 그냥 master 브랜치로 옮기면 된다.</p>
 
@@ -1655,7 +1650,7 @@ $ git commit -a -m 'fixed the broken email address'
  1 files changed, 0 insertions(+), 1 deletions(-)
 </code></pre>
 
-<p><img src="figures/18333fig0313-tn.png" title="3-13. master 브랜치에서 갈라져 나온 hotfix 브랜치" alt="3-13. master 브랜치에서 갈라져 나온 hotfix 브랜치" /></p>
+<p><img src="figures/18333fig0313-tn.png" title="3-13. master 브랜치에서 갈라져 나온 hotfix 브랜치" alt="3-13. master 브랜치에서 갈라져 나온 hotfix 브랜치" /><br /><span class="image-title" style="font-weight:bold;">3-13. master 브랜치에서 갈라져 나온 hotfix 브랜치</span></p>
 
 <p>운영 환경에 적용하려면 문제를 제대로 고쳤는지 테스트하고 master 브랜치에 합쳐야 한다. <code>git merge</code> 명령으로 다음과 같이 한다:</p>
 
@@ -1671,7 +1666,7 @@ Fast forward
 
 <p>이제 hotfix는 master 브랜치에 포함됐고 운영환경에 적용할 수 있다(그림 3-14).</p>
 
-<p><img src="figures/18333fig0314-tn.png" title="3-14. Merge 후 hotfix 브랜치와 같은 것을 가리키는 master 브랜치" alt="3-14. Merge 후 hotfix 브랜치와 같은 것을 가리키는 master 브랜치" /></p>
+<p><img src="figures/18333fig0314-tn.png" title="3-14. Merge 후 hotfix 브랜치와 같은 것을 가리키는 master 브랜치" alt="3-14. Merge 후 hotfix 브랜치와 같은 것을 가리키는 master 브랜치" /><br /><span class="image-title" style="font-weight:bold;">3-14. Merge 후 hotfix 브랜치와 같은 것을 가리키는 master 브랜치</span></p>
 
 <p>문제를 급히 해결하고 master 브랜치에 적용하고 나면 다시 일하던 브랜치로 돌아가야 한다. 하지만, 그전에 필요없는 hotfix 브랜치를 삭제한다. <code>git branch</code> 명령에 <code>-d</code> 옵션을 주고 브랜치를 삭제한다.</p>
 
@@ -1689,7 +1684,7 @@ $ git commit -a -m 'finished the new footer [issue 53]'
  1 files changed, 1 insertions(+), 0 deletions(-)
 </code></pre>
 
-<p><img src="figures/18333fig0315-tn.png" title="3-15. master와 별개로 진행하는 iss53 브랜치" alt="3-15. master와 별개로 진행하는 iss53 브랜치" /></p>
+<p><img src="figures/18333fig0315-tn.png" title="3-15. master와 별개로 진행하는 iss53 브랜치" alt="3-15. master와 별개로 진행하는 iss53 브랜치" /><br /><span class="image-title" style="font-weight:bold;">3-15. master와 별개로 진행하는 iss53 브랜치</span></p>
 
 <p>위에서 작업한 hotfix가 iss53 브랜치에 영향을 끼치지 않는다는 점을 이해하는 것이 중요하다. <code>git merge master</code> 명령으로 master 브랜치를 iss53 브랜치에 Merge하면 iss53 브랜치에 hotfix가 적용된다. 아니면 iss53 브랜치가 master에 Merge할 수 있는 수준이 될 때까지 기다렸다가 Merge하면 hotfix와 iss53가 합쳐진다.</p>
 
@@ -1706,13 +1701,13 @@ Merge made by recursive.
 
 <p>hotfix를 Merge했을 때와 메시지가 다르다. 현 브랜치가 가리키는 커밋이 Merge할 브랜치의 조상이 아니므로 Git은 'Fast-forward'로 Merge하지 않는다. 이러면 Git은 각 브랜치가 가리키는 커밋 두 개와 공통 조상 하나를 사용하여 3-way Merge를 한다. 그림 3-16에 이 Merge에서 사용하는 커밋 세 개가 표시된다.</p>
 
-<p><img src="figures/18333fig0316-tn.png" title="3-16. Git은 Merge에 필요한 공통 커밋을 자동으로 찾음" alt="3-16. Git은 Merge에 필요한 공통 커밋을 자동으로 찾음" /></p>
+<p><img src="figures/18333fig0316-tn.png" title="3-16. Git은 Merge에 필요한 공통 커밋을 자동으로 찾음" alt="3-16. Git은 Merge에 필요한 공통 커밋을 자동으로 찾음" /><br /><span class="image-title" style="font-weight:bold;">3-16. Git은 Merge에 필요한 공통 커밋을 자동으로 찾음</span></p>
 
 <p>단순히 브랜치 포인터를 최신 커밋으로 옮기는 게 아니라 3-way Merge의 결과를 별도의 커밋으로 만들고 나서 해당 브랜치가 그 커밋을 가리키도록 이동시킨다(그림 3-17). 그래서 이런 커밋은 부모가 여러 개고 Merge 커밋이라고 부른다.</p>
 
 <p>Git은 Merge하는데 필요한 최적의 공통 조상을 자동으로 찾는다. 이런 기능도 Git이 다른 버전 관리 시스템보다 나은 점이다. CVS나 Subversion 같은 버전 관리 시스템들은 개발자가 직접 공통 조상을 찾아서 Merge해야 한다. Git은 다른 시스템보다 Merge가 대단히 쉽다.</p>
 
-<p><img src="figures/18333fig0317-tn.png" title="3-17. Git은 Merge할 때 Merge에 대한 정보가 들어 있는 커밋를 하나 만든다." alt="3-17. Git은 Merge할 때 Merge에 대한 정보가 들어 있는 커밋를 하나 만든다." /></p>
+<p><img src="figures/18333fig0317-tn.png" title="3-17. Git은 Merge할 때 Merge에 대한 정보가 들어 있는 커밋를 하나 만든다." alt="3-17. Git은 Merge할 때 Merge에 대한 정보가 들어 있는 커밋를 하나 만든다." /><br /><span class="image-title" style="font-weight:bold;">3-17. Git은 Merge할 때 Merge에 대한 정보가 들어 있는 커밋를 하나 만든다.</span></p>
 
 <p>iss53 브랜치를 master에 Merge하고 나면 iss53 브랜치는 더는 필요 없다. 다음 명령으로 브랜치를 삭제하고 이슈의 상태를 처리 완료로 표시한다:</p>
 
@@ -1729,9 +1724,7 @@ CONFLICT (content): Merge conflict in index.html
 Automatic merge failed; fix conflicts and then commit the result.
 </code></pre>
 
-<p>Git은 Merge하지 못했다. 충돌을 개발자가 해결하지 않는 한 Merge할 수 없다. 일단 충돌이 일어나면 <code>git status</code> 명령으로 어떤 파일에 충돌이 일어났는지 확인한다:</p>
-
-<p>Git은 성공적으로 Merge된 새 커밋을 만들어낼 수 없다. 변경사항의 충돌을 개발자가 해결하지 않는 한 Merge 과정을 진행할 수 없다. Merge 충돌이 일어났을 때 Git이 어떤 파일을 Merge 할 수 없었는지 살펴보려면 <code>git status</code> 명령을 이용한다:</p>
+<p>Git은 자동으로 Merge된 새 커밋을 만들어내지 못했다. 변경사항의 충돌을 개발자가 해결하지 않는 한 Merge 과정을 진행할 수 없다. Merge 충돌이 일어났을 때 Git이 어떤 파일을 Merge 할 수 없었는지 살펴보려면 어느 시점에서든 <code>git status</code> 명령을 이용한다:</p>
 
 <pre><code>[master*]$ git status
 index.html: needs merge
@@ -1774,7 +1767,7 @@ Normal merge conflict for 'index.html':
 Hit return to start merge resolution tool (opendiff):
 </code></pre>
 
-<p>내가 Mac을 사용해서 Git은 <code>opendiff</code>를 실행해준다. 기본 도구 말고 사용할 수 있는 다른 Merge 도구도 있는데, 'merge tool candidates' 부분에 보여준다. 여기에 표시된 도구 중 하나를 고를 수 있다. Merge 도구를 변경하는 방법은 7장에서 다룬다.</p>
+<p>Mac을 사용하는 경우 Git은 <code>opendiff</code>를 실행해준다. 기본 도구 말고 사용할 수 있는 다른 Merge 도구도 있는데, 'merge tool candidates' 부분에 보여준다. 여기에 표시된 도구 중 하나를 고를 수 있다. Merge 도구를 변경하는 방법은 7장에서 다룬다.</p>
 
 <p>Merge 도구를 종료하면 Git은 잘 Merge했는지 물어본다. 잘 마쳤다고 입력하면 자동으로 <code>git add</code>를 수행해서 해당 파일을 Staging Area에 저장해준다.</p>
 
@@ -1861,11 +1854,11 @@ If you are sure you want to delete it, run 'git branch -D testing'.
 
 <p>사실 우리가 얘기하는 것은 커밋을 가리키는 포인터에 대한 얘기다. 개발 브랜치는 공격적으로 히스토리를 만들어 나아가고 안정 브랜치는 이미 만든 히스토리를 뒤따르며 나아간다.</p>
 
-<p><img src="figures/18333fig0318-tn.png" title="3-18. 안정적인 브랜치일수록 커밋 히스토리가 뒤쳐진다." alt="3-18. 안정적인 브랜치일수록 커밋 히스토리가 뒤쳐진다." /></p>
+<p><img src="figures/18333fig0318-tn.png" title="3-18. 안정적인 브랜치일수록 커밋 히스토리가 뒤쳐진다." alt="3-18. 안정적인 브랜치일수록 커밋 히스토리가 뒤쳐진다." /><br /><span class="image-title" style="font-weight:bold;">3-18. 안정적인 브랜치일수록 커밋 히스토리가 뒤쳐진다.</span></p>
 
 <p>실험실에서 충분히 테스트하고 실전에 배치하는 과정으로 보면 이해하기 쉽다(그림 3-19).</p>
 
-<p><img src="figures/18333fig0319-tn.png" title="3-19. 각 브랜치를 하나의 실험실로 생각하면 쉽다." alt="3-19. 각 브랜치를 하나의 실험실로 생각하면 쉽다." /></p>
+<p><img src="figures/18333fig0319-tn.png" title="3-19. 각 브랜치를 하나의 실험실로 생각하면 쉽다." alt="3-19. 각 브랜치를 하나의 실험실로 생각하면 쉽다." /><br /><span class="image-title" style="font-weight:bold;">3-19. 각 브랜치를 하나의 실험실로 생각하면 쉽다.</span></p>
 
 <p>코드를 여러 단계로 나누어 안정성을 높여가며 운영할 수 있다. 큰 규모의 프로젝트라면 proposed 혹은 pu(proposed updates)라는 이름의 브랜치를 두어 next나 master 브랜치에 아직 Merge할 준비가 되지 않은 것을 일단 Merge시킨다.</p>
 
@@ -1879,11 +1872,11 @@ If you are sure you want to delete it, run 'git branch -D testing'.
 
 <p>master 브랜치를 checkout한 상태에서 어떤 작업을 한다고 해보자. 한 이슈를 처리하기 위해서 iss91라는 브랜치를 만들고 해당 작업을 한다. 어쩌면 같은 이슈를 다른 방법으로 해결해볼 수도 있다. iss91v2라는 브랜치를 만들고 다른 방법을 시도해 본다. 확신할 수 없는 아이디어를 적용해보기 위해 다시 master 브랜치로 되돌아가서 dumbidea 브랜치를 하나 더 만든다. 지금까지 말했던 커밋 히스토리는 그림 3-20과 같을 것이다.</p>
 
-<p><img src="figures/18333fig0320-tn.png" title="3-20. 여러 토픽 브랜치에 대한 커밋 히스토리" alt="3-20. 여러 토픽 브랜치에 대한 커밋 히스토리" /></p>
+<p><img src="figures/18333fig0320-tn.png" title="3-20. 여러 토픽 브랜치에 대한 커밋 히스토리" alt="3-20. 여러 토픽 브랜치에 대한 커밋 히스토리" /><br /><span class="image-title" style="font-weight:bold;">3-20. 여러 토픽 브랜치에 대한 커밋 히스토리</span></p>
 
 <p>이슈를 처리했던 방법 중 두 번째 방법인 iss91v2 브랜치가 괜찮아서 적용하기로 결정을 내렸다. 그리고 아이디어를 확신할 수 없었던 dumbidea 브랜치를 같이 일하는 다른 개발자에게 보여줬더니 썩 괜찮다는 반응을 얻었다. iss91 브랜치는 (C5, C6 커밋도 함께) 버리고 다른 두 브랜치를 Merge하면 그림 3-21과 같이 된다.</p>
 
-<p><img src="figures/18333fig0321-tn.png" title="3-21. dumbidea와 iss91v2 브랜치를 Merge하고 난 후의 모습" alt="3-21. dumbidea와 iss91v2 브랜치를 Merge하고 난 후의 모습" /></p>
+<p><img src="figures/18333fig0321-tn.png" title="3-21. dumbidea와 iss91v2 브랜치를 Merge하고 난 후의 모습" alt="3-21. dumbidea와 iss91v2 브랜치를 Merge하고 난 후의 모습" /><br /><span class="image-title" style="font-weight:bold;">3-21. dumbidea와 iss91v2 브랜치를 Merge하고 난 후의 모습</span></p>
 
 <p>지금까지 했던 작업은 전부 로컬에서만 처리된다는 것을 꼭 기억해야 한다. 로컬 저장소에서만 브랜치를 만들고 Merge했으며 서버와 통신을 주고받는 일은 없었다.</p>
 
@@ -1895,25 +1888,25 @@ If you are sure you want to delete it, run 'git branch -D testing'.
 
 <p>다소 헷갈릴 수 있으니 예제를 좀 더 살펴보자. <code>git.ourcompany.com</code> 이라는 Git 서버가 있고 이 서버의 저장소를 하나 Clone하면 Git은 자동으로 origin이라는 이름을 붙인다. origin으로부터 저장소 데이터를 모두 내려받고 나서 master 브랜치를 가리키는 포인터를 만든다. 이 포인터는 origin/master라고 부르고 멋대로 조종할 수 없다. 그리고 Git은 로컬의 master 브랜치가 origin/master를 가리키게 한다. 이제 이 master 브랜치에서 작업을 시작할 수 있다.</p>
 
-<p><img src="figures/18333fig0322-tn.png" title="3-22. 저장소를 Clone하면 로컬 master 브랜치, 리모트 저장소의 master 브랜치를 가리키는 origin/master 브랜치가 생김" alt="3-22. 저장소를 Clone하면 로컬 master 브랜치, 리모트 저장소의 master 브랜치를 가리키는 origin/master 브랜치가 생김" /></p>
+<p><img src="figures/18333fig0322-tn.png" title="3-22. 저장소를 Clone하면 로컬 master 브랜치, 리모트 저장소의 master 브랜치를 가리키는 origin/master 브랜치가 생김" alt="3-22. 저장소를 Clone하면 로컬 master 브랜치, 리모트 저장소의 master 브랜치를 가리키는 origin/master 브랜치가 생김" /><br /><span class="image-title" style="font-weight:bold;">3-22. 저장소를 Clone하면 로컬 master 브랜치, 리모트 저장소의 master 브랜치를 가리키는 origin/master 브랜치가 생김</span></p>
 
 <p>로컬 저장소에서 어떤 작업을 하고 있는데 동시에 다른 팀원이 <code>git.ourcompany.com</code> 서버에 Push하고 master 브랜치를 업데이트한다. 그러면 이제 팀원 간의 히스토리는 서로 달라진다. 또한, 서버 저장소로부터 어떤 데이터도 주고받지 않으면 origin/master 포인터는 항상 그대로다.</p>
 
-<p><img src="figures/18333fig0323-tn.png" title="3-24. 로컬과 서버의 커밋 히스토리는 독립적임." alt="3-24. 로컬과 서버의 커밋 히스토리는 독립적임." /></p>
+<p><img src="figures/18333fig0323-tn.png" title="3-24. 로컬과 서버의 커밋 히스토리는 독립적임." alt="3-24. 로컬과 서버의 커밋 히스토리는 독립적임." /><br /><span class="image-title" style="font-weight:bold;">3-24. 로컬과 서버의 커밋 히스토리는 독립적임.</span></p>
 
 <p>리모트 서버로부터 저장소 정보를 동기화하려면 <code>git fetch origin</code> 명령을 사용한다. 명령을 실행하면 우선 origin 서버의 주소 정보(이 예에서는 <code>git.ourcompany.com</code>)를 찾아서, 현재 로컬의 저장소가 갖고 있지 않은 새로운 정보가 있다면 모두 내려받고, 받은 데이터를 로컬 저장소에 업데이트하고 나서, origin/master 포인터의 위치를 최신 커밋으로 이동시킨다.</p>
 
-<p><img src="figures/18333fig0324-tn.png" title="3-24. Git의 Fetch 명령은 리모트 브랜치 정보를 업데이트한다." alt="3-24. Git의 Fetch 명령은 리모트 브랜치 정보를 업데이트한다." /></p>
+<p><img src="figures/18333fig0324-tn.png" title="3-24. Git의 Fetch 명령은 리모트 브랜치 정보를 업데이트한다." alt="3-24. Git의 Fetch 명령은 리모트 브랜치 정보를 업데이트한다." /><br /><span class="image-title" style="font-weight:bold;">3-24. Git의 Fetch 명령은 리모트 브랜치 정보를 업데이트한다.</span></p>
 
 <p>리모트 저장소를 여러 개 운영하는 상황을 이해할 수 있도록 개발용으로 사용할 Git 저장소를 팀 내부에 하나 추가해 보자.</p>
 
 <p>이 저장소의 주소가 <code>git.team1.ourcompany.com</code> 이면 2장에서 살펴본 <code>git remote add</code> 명령으로 현재 작업 중인 프로젝트에 팀의 저장소를 추가한다. 긴 서버 주소 대신 사용할 이름을 teamone으로 짓는다.</p>
 
-<p><img src="figures/18333fig0325-tn.png" title="3-25. 서버를 리모트 저장소로 추가하기" alt="3-25. 서버를 리모트 저장소로 추가하기" /></p>
+<p><img src="figures/18333fig0325-tn.png" title="3-25. 서버를 리모트 저장소로 추가하기" alt="3-25. 서버를 리모트 저장소로 추가하기" /><br /><span class="image-title" style="font-weight:bold;">3-25. 서버를 리모트 저장소로 추가하기</span></p>
 
-<p>서버를 추가하고 나면 <code>git fetch teamone</code> 명령으로 teamone 서버의 데이터를 내려받는다. 명령을 실행해도 teamone 서버의 데이터는 모두 origin 서버에도 있는 것들이라서 아무것도 내려받지 않는다. 하지만, 이 명령을 실행하면 teamone/master 브랜치의 포인터가 temone의 master 브랜치와 가리키는 것을 가리키게 한다.</p>
+<p>서버를 추가하고 나면 <code>git fetch teamone</code> 명령으로 teamone 서버의 데이터를 내려받는다. 명령을 실행해도 teamone 서버의 데이터는 모두 origin 서버에도 있는 것들이라서 아무것도 내려받지 않는다. 하지만, 이 명령을 실행하면 teamone/master 브랜치의 포인터가 teamone의 master 브랜치와 가리키는 것을 가리키게 한다.</p>
 
-<p><img src="figures/18333fig0326-tn.png" title="3-26. 로컬 저장소에 만들어진 teamone의 master 브랜치를 가리키는 포인터" alt="3-26. 로컬 저장소에 만들어진 teamone의 master 브랜치를 가리키는 포인터" /></p>
+<p><img src="figures/18333fig0326-tn.png" title="3-26. 로컬 저장소에 만들어진 teamone의 master 브랜치를 가리키는 포인터" alt="3-26. 로컬 저장소에 만들어진 teamone의 master 브랜치를 가리키는 포인터" /><br /><span class="image-title" style="font-weight:bold;">3-26. 로컬 저장소에 만들어진 teamone의 master 브랜치를 가리키는 포인터</span></p>
 
 <h3>Push하기</h3>
 
@@ -1985,7 +1978,7 @@ To git@github.com:schacon/simplegit.git
  - [deleted]         serverfix
 </code></pre>
 
-<p>위 명령을 실행하고 나면 서버의 브랜치는 삭제된다. 이 명령을 잊어버릴 경우를 대비해서 페이지 귀퉁이를 접어놓고 필요할 때 펴보는 게 좋을지도 모르겠다. 이 명령은 앞서 살펴본 <code>git push [remotename] [localbranch]:[remotebranch]</code> 형식으로 기억하는 것이 좋다. [localbranch] 부분에 비워 둔 채로 실행하면 '로컬에서 빈 내용을 리모트의 [remotebranch]에 채워 넣어라' 라는 뜻이 되기 때문이다.</p>
+<p>위 명령을 실행하고 나면 서버의 브랜치는 삭제된다. 이 명령을 잊어버릴 경우를 대비해서 페이지 귀퉁이를 접어놓고 필요할 때 펴보는 게 좋을지도 모르겠다. 이 명령은 앞서 살펴본 <code>git push [remotename] [localbranch]:[remotebranch]</code> 형식으로 기억하는 것이 좋다. <code>[localbranch]</code> 부분에 비워 둔 채로 실행하면 '로컬에서 빈 내용을 리모트의 <code>[remotebranch]</code>에 채워 넣어라' 라는 뜻이 되기 때문이다.</p>
 
 <h2>Rebase하기</h2>
 
@@ -1995,11 +1988,11 @@ To git@github.com:schacon/simplegit.git
 
 <p>앞의 Merge 절에서 살펴본 예제로 다시 돌아가 보자(그림 3-27). 두 개의 나누어진 브랜치의 모습을 볼 수 있다.</p>
 
-<p><img src="figures/18333fig0327-tn.png" title="3-27. 두 개의 브랜치로 나누어진 커밋 히스토리" alt="3-27. 두 개의 브랜치로 나누어진 커밋 히스토리" /></p>
+<p><img src="figures/18333fig0327-tn.png" title="3-27. 두 개의 브랜치로 나누어진 커밋 히스토리" alt="3-27. 두 개의 브랜치로 나누어진 커밋 히스토리" /><br /><span class="image-title" style="font-weight:bold;">3-27. 두 개의 브랜치로 나누어진 커밋 히스토리</span></p>
 
 <p>이 두 브랜치를 합치는 가장 쉬운 방법은 앞에서 살펴본 대로 Merge 명령을 사용하는 것이다. 두 브랜치의 마지막 커밋 두 개(C3, C4)와 공통 조상(C2)을 사용하는 3-way Merge로 그림 3-28처럼 새로운 커밋을 만들어 낸다.</p>
 
-<p><img src="figures/18333fig0328-tn.png" title="3-28. 나뉜 브랜치를 Merge하기" alt="3-28. 나뉜 브랜치를 Merge하기" /></p>
+<p><img src="figures/18333fig0328-tn.png" title="3-28. 나뉜 브랜치를 Merge하기" alt="3-28. 나뉜 브랜치를 Merge하기" /><br /><span class="image-title" style="font-weight:bold;">3-28. 나뉜 브랜치를 Merge하기</span></p>
 
 <p>비슷한 결과를 만드는 다른 방식으로, C3에서 변경된 사항을 패치(Patch)로 만들고 이를 다시 C4에 적용시키는 방법이 있다. Git에서는 이런 방식을 <em>Rebase</em> 라고 한다. Rebase 명령으로 한 브랜치에서 변경된 사항을 다른 브랜치에 적용할 수 있다.</p>
 
@@ -2013,11 +2006,11 @@ Applying: added staged command
 
 <p>실제로 일어나는 일을 설명하자면 일단 두 브랜치가 나뉘기 전인 공통 커밋으로 이동하고 나서 그 커밋부터 지금 Checkout한 브랜치가 가리키는 커밋까지 diff를 차례로 만들어 어딘가에 임시로 저장해 놓는다. Rebase할 브랜치(역주 - experiment)가 합칠 브랜치(역주 - master)가 가리키는 커밋을 가리키게 하고 아까 저장해 놓았던 변경사항을 차례대로 적용한다. 그림 3-29는 이러한 과정을 나타내고 있다.</p>
 
-<p><img src="figures/18333fig0329-tn.png" title="3-29. C3의 변경사항을 C4에 적용하는 Rebase 과정" alt="3-29. C3의 변경사항을 C4에 적용하는 Rebase 과정" /></p>
+<p><img src="figures/18333fig0329-tn.png" title="3-29. C3의 변경사항을 C4에 적용하는 Rebase 과정" alt="3-29. C3의 변경사항을 C4에 적용하는 Rebase 과정" /><br /><span class="image-title" style="font-weight:bold;">3-29. C3의 변경사항을 C4에 적용하는 Rebase 과정</span></p>
 
 <p>그리고 나서 master 브랜치를 Fast-forward 시킨다.</p>
 
-<p><img src="figures/18333fig0330-tn.png" title="3-30. master 브랜치를 Fast-forward시키기" alt="3-30. master 브랜치를 Fast-forward시키기" /></p>
+<p><img src="figures/18333fig0330-tn.png" title="3-30. master 브랜치를 Fast-forward시키기" alt="3-30. master 브랜치를 Fast-forward시키기" /><br /><span class="image-title" style="font-weight:bold;">3-30. master 브랜치를 Fast-forward시키기</span></p>
 
 <p>C3'로 표시된 커밋에서의 내용은 Merge 예제에서 살펴본 C5 커밋에서의 내용과 같을 것이다. Merge이든 Rebase든 둘 다 합치는 관점에서는 서로 다를 게 없다. 하지만, Rebase가 좀 더 깨끗한 히스토리를 만든다. Rebase한 브랜치의 Log를 살펴보면 히스토리가 선형적이다. 일을 병렬로 동시에 진행해도 Rebase하고 나면 모든 작업이 차례대로 수행된 것처럼 보인다.</p>
 
@@ -2029,7 +2022,7 @@ Applying: added staged command
 
 <p>Rebase는 단순히 브랜치를 합치는 것만 아니라 다른 용도로도 사용할 수 있다. 그림 3-31과 같은 히스토리가 있다고 하자. server 브랜치를 만들어서 서버 기능을 추가하고 그 브랜치에서 다시 client 브랜치를 만들어 클라이언트 기능을 추가한다. 마지막으로 server 브랜치로 돌아가서 몇 가지 기능을 더 추가한다.</p>
 
-<p><img src="figures/18333fig0331-tn.png" title="3-31. 다른 토픽 브랜치에서 갈라져 나온 토픽 브랜치." alt="3-31. 다른 토픽 브랜치에서 갈라져 나온 토픽 브랜치." /></p>
+<p><img src="figures/18333fig0331-tn.png" title="3-31. 다른 토픽 브랜치에서 갈라져 나온 토픽 브랜치." alt="3-31. 다른 토픽 브랜치에서 갈라져 나온 토픽 브랜치." /><br /><span class="image-title" style="font-weight:bold;">3-31. 다른 토픽 브랜치에서 갈라져 나온 토픽 브랜치.</span></p>
 
 <p>이때 테스트가 덜 된 server 브랜치는 그대로 두고 client 브랜치만 master로 합치려는 상황을 생각해보자. server와는 아무 관련이 없는 client 커밋은 C8, C9이다. 이 두 커밋을 master 브랜치에 적용하기 위해서 <code>--onto</code> 옵션을 사용하여 아래와 같은 명령을 실행한다:</p>
 
@@ -2038,7 +2031,7 @@ Applying: added staged command
 
 <p>이 명령은 client 브랜치를 Checkout하고 server와 client의 공통조상 이후의 패치를 만들어 master에 적용한다. 조금 복잡하긴 해도 꽤 쓸모 있다. 그림 3-32를 보자.</p>
 
-<p><img src="figures/18333fig0332-tn.png" title="3-32. 다른 토픽 브랜치에서 갈라져 나온 토픽 브랜치를 Rebase하기." alt="3-32. 다른 토픽 브랜치에서 갈라져 나온 토픽 브랜치를 Rebase하기." /></p>
+<p><img src="figures/18333fig0332-tn.png" title="3-32. 다른 토픽 브랜치에서 갈라져 나온 토픽 브랜치를 Rebase하기." alt="3-32. 다른 토픽 브랜치에서 갈라져 나온 토픽 브랜치를 Rebase하기." /><br /><span class="image-title" style="font-weight:bold;">3-32. 다른 토픽 브랜치에서 갈라져 나온 토픽 브랜치를 Rebase하기.</span></p>
 
 <p>이제 master 브랜치로 돌아가서 Fast-forward 시킬 수 있다:</p>
 
@@ -2046,7 +2039,7 @@ Applying: added staged command
 $ git merge client
 </code></pre>
 
-<p><img src="figures/18333fig0333-tn.png" title="3-33. master 브랜치를 client 브랜치 위치로 진행 시키기." alt="3-33. master 브랜치를 client 브랜치 위치로 진행 시키기." /></p>
+<p><img src="figures/18333fig0333-tn.png" title="3-33. master 브랜치를 client 브랜치 위치로 진행 시키기." alt="3-33. master 브랜치를 client 브랜치 위치로 진행 시키기." /><br /><span class="image-title" style="font-weight:bold;">3-33. master 브랜치를 client 브랜치 위치로 진행 시키기.</span></p>
 
 <p>server 브랜치의 일이 다 끝나면 <code>git rebase [basebranch] [topicbranch]</code>라는 명령으로 Checkout하지 않고 바로 server 브랜치를 master 브랜치로 rebase할 수 있다. 이 명령은 토픽(server) 브랜치를 Checkout하고 베이스(master) 브랜치에 Rebase한다:</p>
 
@@ -2055,7 +2048,7 @@ $ git merge client
 
 <p>server 브랜치의 수정사항을 master 브랜치에 적용했다. 그 결과는 그림 3-34와 같다.</p>
 
-<p><img src="figures/18333fig0334-tn.png" title="3-34. master 브랜치에 server 브랜치의 수정 사항을 적용" alt="3-34. master 브랜치에 server 브랜치의 수정 사항을 적용" /></p>
+<p><img src="figures/18333fig0334-tn.png" title="3-34. master 브랜치에 server 브랜치의 수정 사항을 적용" alt="3-34. master 브랜치에 server 브랜치의 수정 사항을 적용" /><br /><span class="image-title" style="font-weight:bold;">3-34. master 브랜치에 server 브랜치의 수정 사항을 적용</span></p>
 
 <p>그리고 나서 master 브랜치를 Fast-forward 시킨다:</p>
 
@@ -2069,7 +2062,7 @@ $ git merge server
 $ git branch -d server
 </code></pre>
 
-<p><img src="figures/18333fig0335-tn.png" title="3-35. 최종 커밋 히스토리." alt="3-35. 최종 커밋 히스토리." /></p>
+<p><img src="figures/18333fig0335-tn.png" title="3-35. 최종 커밋 히스토리." alt="3-35. 최종 커밋 히스토리." /><br /><span class="image-title" style="font-weight:bold;">3-35. 최종 커밋 히스토리.</span></p>
 
 <h3>Rebase의 위험성</h3>
 
@@ -2083,19 +2076,19 @@ $ git branch -d server
 
 <p>이미 공개 저장소에 Push한 커밋을 Rebase하면 어떤 결과가 초래되는지 예제를 통해 알아보자. 중앙 저장소에서 Clone하고 일부 수정을 하면 커밋 히스토리는 그림 3-36과 같다.</p>
 
-<p><img src="figures/18333fig0336-tn.png" title="3-36. 저장소를 Clone하고 일부 수정함." alt="3-36. 저장소를 Clone하고 일부 수정함." /></p>
+<p><img src="figures/18333fig0336-tn.png" title="3-36. 저장소를 Clone하고 일부 수정함." alt="3-36. 저장소를 Clone하고 일부 수정함." /><br /><span class="image-title" style="font-weight:bold;">3-36. 저장소를 Clone하고 일부 수정함.</span></p>
 
-<p>이제 팀원 중 누군가 커밋, Merge하고 나서 서버에 Push 한다. 이 리모트 브랜치를 Fetch, Merge하면 그림 3-47과 같이 된다.</p>
+<p>이제 팀원 중 누군가 커밋, Merge하고 나서 서버에 Push 한다. 이 리모트 브랜치를 Fetch, Merge하면 그림 3-37과 같이 된다.</p>
 
-<p><img src="figures/18333fig0337-tn.png" title="3-37. Fetch한 후 Merge함." alt="3-37. Fetch한 후 Merge함." /></p>
+<p><img src="figures/18333fig0337-tn.png" title="3-37. Fetch한 후 Merge함." alt="3-37. Fetch한 후 Merge함." /><br /><span class="image-title" style="font-weight:bold;">3-37. Fetch한 후 Merge함.</span></p>
 
 <p>그런데 Push했던 팀원은 Merge한 일을 되돌리고 다시 Rebase한다. 서버의 히스토리를 새로 덮어씌우려면 <code>git push --force</code> 명령을 사용해야 한다. 이후에 저장소에서 Fetch하고 나면 아래 그림과 같은 상태가 된다:</p>
 
-<p><img src="figures/18333fig0338-tn.png" title="3-38. 한 팀원이 다른 팀원이 의존하는 커밋을 없애고 Rebase한 커밋을 다시 Push함." alt="3-38. 한 팀원이 다른 팀원이 의존하는 커밋을 없애고 Rebase한 커밋을 다시 Push함." /></p>
+<p><img src="figures/18333fig0338-tn.png" title="3-38. 한 팀원이 다른 팀원이 의존하는 커밋을 없애고 Rebase한 커밋을 다시 Push함." alt="3-38. 한 팀원이 다른 팀원이 의존하는 커밋을 없애고 Rebase한 커밋을 다시 Push함." /><br /><span class="image-title" style="font-weight:bold;">3-38. 한 팀원이 다른 팀원이 의존하는 커밋을 없애고 Rebase한 커밋을 다시 Push함.</span></p>
 
 <p>기존 커밋이 사라졌기 때문에 이미 처리한 일이라고 해도 다시 Merge해야 한다. Rebase는 커밋의 SHA-1 해시를 바꾸기 때문에 Git은 새로운 커밋으로 생각한다. 사실 C4는 이미 히스토리에 적용되어 있지만, Git은 모른다.</p>
 
-<p><img src="figures/18333fig0339-tn.png" title="3-39. 같은 Merge를 다시 한다." alt="3-39. 같은 Merge를 다시 한다." /></p>
+<p><img src="figures/18333fig0339-tn.png" title="3-39. 같은 Merge를 다시 한다." alt="3-39. 같은 Merge를 다시 한다." /><br /><span class="image-title" style="font-weight:bold;">3-39. 같은 Merge를 다시 한다.</span></p>
 
 <p>다른 개발자와 계속 같이 일하려면 이런 Merge도 해야만 한다. Merge하면 C4와 C4' 커밋 둘 다 히스토리에 남게 된다. 실제 내용과 메시지가 같지만 SHA-1 해시 값이 전혀 다르다. <code>git log</code>로 히스토리를 확인해보면 저자, 커밋 날짜, 메시지가 같은 커밋이 두 개 있을 것이다. 이렇게 되면 혼란스럽다. 게다가 이 히스토리를 서버에 Push하면 같은 커밋이 두 개 있기 때문에 다른 사람들도 혼란스러워한다.</p>
 
@@ -2106,7 +2099,7 @@ $ git branch -d server
 <p>우리는 이 장에서 Git으로 브랜치를 만들고 Merge 기능의 기본적인 명령을 다루었다. 이제 브랜치를 만들고 옮겨다니고 Merge하는 것에 익숙해졌을 것으로 생각한다. 브랜치를 Push하여 공유하거나 Push하기 전에 브랜치를 Rebase하는 것 정도는 어렵지 않게 할 수 있을 것이다.</p>
 <h1>Git 서버</h1>
 
-<p>이 글을 읽는 독자라면 이미 Git으로 하루 중 대부분 업무를 처리할 수 있을 것이다. 그러나 이제는 다른 사람과 협업하는 방법을 고민할 차례다. 다른 사람과 협업하려면 리모트 저장소가 필요하다. 물론 혼자서 저장소를 만들고 거기에 Push하고 Pull할 수도 있지만 이렇게 하는 것은 아무 의미가 없다. 이렇게 하면 항상 집중하고 있어야 다른 사람이 무슨 일을 하고 있는지 간신히 알 수 있을 것이다. 당신 컴퓨터가 오프라인일 때에도 동료가 저장소를 사용할 수 있도록 언제나 이용할 수 있는 저장소가 필요하다. 즉, 공동으로 사용할 수 있는 저장소를 만들고 모두 이 저장소에 접근하여 Push, Pull할 수 있어야 한다. 우리는 이 저장소를 "Git 서버"라고 부른다. Git 저장소를 운영하는데 많은 자원이 필요한 것이 아녀서 별도로 Git 서버를 준비하지 않아도 된다.</p>
+<p>이 글을 읽는 독자라면 이미 Git으로 하루 중 대부분 업무를 처리할 수 있을 것이다. 그러나 이제는 다른 사람과 협업하는 방법을 고민할 차례다. 다른 사람과 협업하려면 리모트 저장소가 필요하다. 물론 혼자서 저장소를 만들고 거기에 Push하고 Pull할 수도 있지만 이렇게 하는 것은 아무 의미가 없다. 이렇게 하면 항상 집중하고 있어야 다른 사람이 무슨 일을 하고 있는지 간신히 알 수 있을 것이다. 당신 컴퓨터가 오프라인일 때에도 동료가 저장소를 사용할 수 있도록 언제나 이용할 수 있는 저장소가 필요하다. 즉, 공동으로 사용할 수 있는 저장소를 만들고 모두 이 저장소에 접근하여 Push, Pull할 수 있어야 한다. 우리는 이 저장소를 "Git 서버"라고 부른다. Git 저장소를 운영하는데 많은 자원이 필요한 것이 아니어서 별도로 Git 서버를 준비하지 않아도 된다.</p>
 
 <p>Git 서버를 운영하는 것은 어렵지 않다. 우선 사용할 전송 프로토콜부터 정한다. 이 장의 앞부분에서는 어떤 프로토콜이 있는지 그리고 각 장단점은 무엇인지 살펴볼 것이다. 그다음엔 각 프로토콜을 사용하는 방법과 그 프로토콜을 사용할 수 있도록 서버를 구성하는 방법을 살펴볼 것이다. 마지막으로 다른 사람의 서버에 내 코드를 맡기긴 싫고 고생스럽게 서버를 설치하고 관리하고 싶지도 않을 때 고를 수 있는 선택지가 어떤 것들이 있는지 살펴볼 것이다.</p>
 
@@ -2173,11 +2166,11 @@ $ git branch -d server
 
 <h4>장점</h4>
 
-<p>SSH는 장점이 매우 많은 프로토콜이다. 첫째, 누가 리모트에서 저장소에 접근하는지 알고 싶다면 SSH를 사용해야 한다. 둘째 SSH는 상대적으로 설정하기 쉽다. SSH 데몬은 정말 흔하다. 많은 네트워크 관리자들은 SSH 데몬을 다루어본 경험이 있고 대부분의 OS 배포판에는 SSH 데몬과 관리도구들이 모두 들어 있다. 셋째 SSH를 통해 접근하면 보안에 안전하다. 모든 데이터는 암호화되어 인증된 상태로 전송된다. 마지막으로 SSH는 전송 시 데이터를 가능한 압축하기 때문에 효율적이다.</p>
+<p>SSH는 장점이 매우 많은 프로토콜이다. 첫째, 누가 리모트에서 저장소에 접근하는지 알고 싶다면 SSH를 사용해야 한다. 둘째, SSH는 상대적으로 설정하기 쉽다. SSH 데몬은 정말 흔하다. 많은 네트워크 관리자들은 SSH 데몬을 다루어본 경험이 있고 대부분의 OS 배포판에는 SSH 데몬과 관리도구들이 모두 들어 있다. 셋째, SSH를 통해 접근하면 보안에 안전하다. 모든 데이터는 암호화되어 인증된 상태로 전송된다. 마지막으로 SSH는 전송 시 데이터를 가능한 압축하기 때문에 효율적이다.</p>
 
 <h4>단점</h4>
 
-<p>SSH의 단점은 익명으로 접근할 수 없다는 것이다. 심지어 읽기 전용인 경우에도 익명으로 시스템에 접근할 수 없다. 회사에서만 사용할 것이라면 SSH가 가장 적합한 프로토콜일 것이지만 오픈소스 프로젝트는 SSH만으로는 부족하다. 만약 사람들이 프로젝트에 익명으로 접근할 수 있게 하려면 혼자만 Push할 수 있고 다른 사람들은 Pull만 할 수 있도록 SSH를 설정해야 한다.</p>
+<p>SSH의 단점은 익명으로 접근할 수 없다는 것이다. 심지어 읽기 전용인 경우에도 익명으로 시스템에 접근할 수 없다. 회사에서만 사용할 것이라면 SSH가 가장 적합한 프로토콜일 것이지만 오픈소스 프로젝트는 SSH만으로는 부족하다. 만약 사람들이 프로젝트에 익명으로 접근할 수 있게 하려면, 자신이 Push할 때 사용할 SSH를 설치하는 것과 별개로 다른 사람들이 Pull할 때 사용할 다른 프로토콜을 추가해야 한다.</p>
 
 <h3>Git 프로토콜</h3>
 
@@ -2185,7 +2178,7 @@ $ git branch -d server
 
 <h4>장점</h4>
 
-<p>Git 프로토콜은 전송속도가 가장 빠르다. 교통이 많은 공개 프로젝트나 별도의 인증이 필요 없고 읽기만 허용하는 프로젝트를 서비스할 때 유용하다. 암호화와 인증을 빼면 SSH 프로토콜과 전송 메커니즘이 별반 다르지 않다.</p>
+<p>Git 프로토콜은 전송속도가 가장 빠르다. 전송량이 많은 공개 프로젝트나 별도의 인증이 필요 없고 읽기만 허용하는 프로젝트를 서비스할 때 유용하다. 암호화와 인증을 빼면 SSH 프로토콜과 전송 메커니즘이 별반 다르지 않다.</p>
 
 <h4>단점</h4>
 
@@ -2448,7 +2441,7 @@ exec git-update-server-info
 
 <p>프로젝트 저장소를 단순히 읽거나 쓰는 것에 대한 설정은 다뤘다. 이제는 웹 기반 인터페이스를 설정해 보자. Git은 웹에서 저장소들을 조회할 수 있는 GitWeb이라는 CGI 스크립트를 제공한다. <code>http://git.kernel.org</code>같은 사이트에서 GitWeb을 구경할 수 있다(그림 4-1).</p>
 
-<p><img src="figures/18333fig0401-tn.png" title="4-1. Git 웹용 UI, GitWeb" alt="4-1. Git 웹용 UI, GitWeb" /></p>
+<p><img src="figures/18333fig0401-tn.png" title="4-1. Git 웹용 UI, GitWeb" alt="4-1. Git 웹용 UI, GitWeb" /><br /><span class="image-title" style="font-weight:bold;">4-1. Git 웹용 UI, GitWeb</span></p>
 
 <p>Git은 GitWeb을 쉽게 사용해 볼 수 있도록 서버를 잠시 띄워 볼 수 있는 명령을 제공한다. 시스템에 <code>lighttpd</code>나 <code>webrick</code> 같은 경량 웹서버가 설치돼 있어야 이 명령을 사용할 수 있다. 리눅스에서는 <code>lighttpd</code>가 설치돼 있을 확률이 높아서 프로젝트 디렉토리에서 그냥 <code>git instaweb</code>을 실행하면 바로 실행될 것이다. Mac의 Leopard 버전은 Ruby가 미리 설치돼 있기 때문에 <code>webrick</code>이 더 나은 선택이다. lighttpd이 아니라면 다음과 같이 <code>--httpd</code> 옵션을 사용해야 한다:</p>
 
@@ -2549,7 +2542,7 @@ fatal: unrecognized command 'gitosis-serve schacon@quaternion'
   Connection to gitserver closed.
 </code></pre>
 
-<p>이것은 접속을 시도한 사용자가 누구인지 식별할 수는 있지만, Git 명령이 아녀서 거절한다는 것을 의미한다. 그러니까 실제 Git 명령어를 실행시켜보자. Gitosis 제어 저장소를 Clone한다:</p>
+<p>이것은 접속을 시도한 사용자가 누구인지 식별할 수는 있지만, Git 명령이 아니어서 거절한다는 것을 의미한다. 그러니까 실제 Git 명령어를 실행시켜보자. Gitosis 제어 저장소를 Clone한다:</p>
 
 <pre><code># on your local computer
 $ git clone git@gitserver:gitosis-admin.git
@@ -2658,9 +2651,9 @@ members   = @mobile_committers john
 
 <h2>Gitolite</h2>
 
-<p>주의사항: 이 절의 최신판은 항상 <a href="http://github.com/sitaramc/gitolite/blob/pu/doc/progit-article.mkd">gitolite documentation</a>에서 확인할 수 있다. 저자는 다른 참고 문서 없이 이 절만 읽고서도 gtolite를 설치할 수 있도록 문서를 작성했다고 말했다. 이 절은 꼭 필요하지만 완벽하지 않고 gitolite에 대한 방대한 문서를 대체할 수도 없다.</p>
+<p>주의사항: 이 절의 최신판은 항상 <a href="http://github.com/sitaramc/gitolite/blob/pu/doc/progit-article.mkd">gitolite documentation</a>에서 확인할 수 있다. 저자는 다른 참고 문서 없이 이 절만 읽고서도 Gitolite를 설치할 수 있도록 문서를 작성했다고 말했다. 이 절은 꼭 필요하지만 완벽하지 않고 Gitolite에 대한 방대한 문서를 대체할 수도 없다.</p>
 
-<p>Git은 좀 더 꼼꼼한 접근 제어가 필요한 기업환경에서도 많이 쓰인다. 원래 이 요구 사항 덕분에 Gitolite가 만들어졌다. 그리고 오픈 소스 진영에서도 매우 유용하다는 것이 밝혀졌다. Fedora 프로젝트는 gitolite를 사용하여 10,000개가 넘는 패키지 관리용 저장소의 권한을 제어한다. Fedora의 gitolite가 아마도 가장 규모가 클 것이다.</p>
+<p>Git은 좀 더 꼼꼼한 접근 제어가 필요한 기업환경에서도 많이 쓰인다. 원래 이 요구 사항 덕분에 Gitolite가 만들어졌다. 그리고 오픈 소스 진영에서도 매우 유용하다는 것이 밝혀졌다. Fedora 프로젝트는 Gitolite를 사용하여 10,000개가 넘는 패키지 관리용 저장소의 권한을 제어한다. Fedora의 Gitolite가 아마도 가장 규모가 클 것이다.</p>
 
 <p>Gitolite는 저장소뿐만 아니라 저장소의 브랜치나 태그에도 권한을 명시할 수 있다. 즉, 어떤 사람들은 refs(브랜치나 태그)에 Push할 수 있고 어떤 사람은 할 수 없게 하는 것이 가능하다.</p>
 
@@ -2668,9 +2661,9 @@ members   = @mobile_committers john
 
 <p>별도 문서를 읽지 않아도 유닉스 계정만 하나 있으면 Gitolite를 쉽게 설치할 수 있다. 이 글은 여러 가지 리눅스들과 솔라리스 10에서 테스트를 마쳤다. git, perl, openssh가 호환되는 ssh 서버가 설치돼 있으면 root 권한도 필요 없다. 앞서 사용했던 <code>gitserver</code>라는 서버와 그 서버에 <code>gitolite</code> 계정을 만들어 사용할 것이다.</p>
 
-<p>Gitolite는 보통의 서버 소프트웨어와는 약간 다르다. ssh를 통해서 접근하지만, 서버의 모든 계정은 근본적으로 "gitolite 호스트"가 될 수 있다. 그래서 설치하는 일은 소프트웨어 자체를 설치하는 일과 한 계정을 "gitolite 호스트"로 설정하는 작업으로 나눌 수 있다.</p>
+<p>Gitolite는 보통의 서버 소프트웨어와는 약간 다르다. ssh를 통해서 접근하지만, 서버의 모든 계정은 근본적으로 "Gitolite 호스트"가 될 수 있다. 그래서 설치하는 일은 소프트웨어 자체를 설치하는 일과 한 계정을 "Gitolite 호스트"로 설정하는 작업으로 나눌 수 있다.</p>
 
-<p>Gitolite를 설치하는 방법은 모두 네 가지이다. Fedora나 Debian을 사용하고 있으면 RPM이나 DEB 패키지를 구해서 설치하거나 수동으로 설치할 수 있다. 이 방법들은 root 권한이 필요하다. 이 두 가지 모두 시스템의 모든 사용자를 각각 "gitolite host"로 만들 수 있다.</p>
+<p>Gitolite를 설치하는 방법은 모두 네 가지이다. Fedora나 Debian을 사용하고 있으면 RPM이나 DEB 패키지를 구해서 설치하거나 수동으로 설치할 수 있다. 이 방법들은 root 권한이 필요하다. 이 두 가지 모두 시스템의 모든 사용자를 각각 "Gitolite 호스트"로 만들 수 있다.</p>
 
 <p>서버의 Root 권한을 얻을 수 없는 사용자는 자신의 계정에 설치할 수 있다. 서버에서 Bash 스크립트를 실행하여 Gitolite를 설치할 수 있다. 심지어 Windows 환경에서 msysgit에 들어 있는 bash에서도 실행된다.</p>
 
@@ -2694,11 +2687,11 @@ $ cd gitolite/src
 $ ./gl-easy-install -q gitolite gitserver sitaram
 </code></pre>
 
-<p>이제 다 됐다. Gitolite를 서버에 설치했고 홈 디렉토리에 <code>gitolite-admin</code>라는 저장소를 만들었다. 이 저장소를 수정하고 Push해서 gitolite 서버를 관리할 수 있다.</p>
+<p>이제 다 됐다. Gitolite를 서버에 설치했고 홈 디렉토리에 <code>gitolite-admin</code>라는 저장소를 만들었다. 이 저장소를 수정하고 Push해서 Gitolite 서버를 관리할 수 있다.</p>
 
 <p>마지막 명령에는 중요한 정보가 많이 들어 있다. 이 명령을 처음 실행하면 키쌍이(keypair) 새로 만들어진다. 암호가 필요하면 입력하고 필요 없으면 그냥 엔터를 친다. 왜 키를 하나 더 만드는지, 그것을 어떻게 사용하는지는 Gitolite의 "ssh troubleshooing" 문서를 참고하라(이 문서가 필요할 때가 있다).</p>
 
-<p>서버에는 기본적으로 <code>gitolite-admin</code>과 <code>testing</code> 저장소가 생성되고 필요하면 이 저장소를 다음과 같이 Clone한다(<em>authorized_keys</em> 파일에 공개키가 등록돼서 SSH 접근이 가능한 계정으로 gotolite 계정에 접근하는 것):</p>
+<p>서버에는 기본적으로 <code>gitolite-admin</code>과 <code>testing</code> 저장소가 생성되고 필요하면 이 저장소를 다음과 같이 Clone한다(<em>authorized_keys</em> 파일에 공개키가 등록돼서 SSH 접근이 가능한 계정으로 Gitolite 계정에 접근하는 것):</p>
 
 <pre><code>$ git clone gitolite:gitolite-admin
 $ git clone gitolite:testing
@@ -2773,13 +2766,13 @@ repo testing
 
 <p>이제는 접근제어 규칙이 실제로 어떻게 적용되는지 궁금할 것이다. 이제부터 그 내용을 살펴보자.</p>
 
-<p>Gitlolite는 두 단계로 접근을 제어한다. 첫 단계가 저장소 단계인데 접근하는 저장소의 ref 중에서 하나라도 읽고 쓸 수 있으면 실제로 그 저장소 전부에 대한 읽기, 쓰기 권한이 있는 것이다.</p>
+<p>Gitolite는 두 단계로 접근을 제어한다. 첫 단계가 저장소 단계인데 접근하는 저장소의 ref 중에서 하나라도 읽고 쓸 수 있으면 실제로 그 저장소 전부에 대한 읽기, 쓰기 권한이 있는 것이다.</p>
 
 <p>두 번째 단계는 브랜치나 태그 단위로 제어하는 것으로 오직 "쓰기" 접근만 제어할 수 있다. 어느 사용자가 특정 ref 이름으로 접근을 시도하면(<code>W</code>나 <code>+</code>같은) 설정 파일에 정의된 순서대로 접근 제어 규칙이 적용된다. 그 순서대로 사용자 이름과 ref 이름을 비교하는데 ref 이름의 경우 단순히 문자열을 비교하는 것이 아니라 정규 표현식을 만족하게 하는 것이다. 만족하는 것을 찾으면 정상적으로 Push되지만 찾지 못하면 거절된다.</p>
 
 <h3>"deny" 규칙을 꼼꼼하게 제어하기</h3>
 
-<p>지금까지는 <code>R</code>, <code>RW</code>, RW+<code>권한에 대해서만 다뤘다. gitolite는 "deny" 규칙을 위해서</code>-<code>권한도 지원한다. 이것으로 복잡도를 낮출 수 있다.</code>-`로 거절도 할 수 있기 때문에 <em>규칙의 순서가 중요하다</em>.</p>
+<p>지금까지는 <code>R</code>, <code>RW</code>, <code>RW+</code> 권한에 대해서만 다뤘다. Gitolite는 "deny" 규칙을 위해서 <code>-</code> 권한도 지원한다. 이것으로 복잡도를 낮출 수 있다. <code>-</code>로 거절도 할 수 있기 때문에 <em>규칙의 순서가 중요하다</em>.</p>
 
 <p>다시 말해서 engineers가 master와 integ 브랜치 <em>이외의</em> 모든 브랜치를 되돌릴 수 있게 하고 싶으면 다음과 같이 한다:</p>
 
@@ -2894,7 +2887,7 @@ daemon = yes
 
 <p>차례대로 커밋과 Push하고 나면 지금 실행 중인 데몬이 9418 포트로 접근하는 사람에게 서비스하기 시작할 것이다.</p>
 
-<p>Gitosis 없이도 Git 데몬을 설치할 수 있지만 그럴러면 서비스하고자 하는 프로젝트마다 다음과 같이 <code>git-daemon-export-ok</code> 파일을 넣어 주어야 한다:</p>
+<p>Gitosis 없이도 Git 데몬을 설치할 수 있지만 그러려면 서비스하고자 하는 프로젝트마다 다음과 같이 <code>git-daemon-export-ok</code> 파일을 넣어 주어야 한다:</p>
 
 <pre><code>$ cd /path/to/project.git
 $ touch git-daemon-export-ok
@@ -2942,15 +2935,15 @@ gitweb = yes
 
 <p>먼저 무료 계정을 하나 만든다. 가격 정책에 대해 알려주며 가입을 시작할 수 있는 <code>http://github.com/plans</code>에 방문하여 "Sign up" 버튼을 클릭한다. 그러면 가입 페이지로 이동한다.</p>
 
-<p><img src="figures/18333fig0402-tn.png" title="4-2. GitHub 가격 정책 페이지." alt="4-2. GitHub 가격 정책 페이지." /></p>
+<p><img src="figures/18333fig0402-tn.png" title="4-2. GitHub 가격 정책 페이지." alt="4-2. GitHub 가격 정책 페이지." /><br /><span class="image-title" style="font-weight:bold;">4-2. GitHub 가격 정책 페이지.</span></p>
 
 <p>아직 등록되지 않은 사용자 이름을 입력하고 e-mail 주소와 암호를 입력한다(그림 4-3).</p>
 
-<p><img src="figures/18333fig0403-tn.png" title="4-3. GitHub 가입 폼." alt="4-3. GitHub 가입 폼." /></p>
+<p><img src="figures/18333fig0403-tn.png" title="4-3. GitHub 가입 폼." alt="4-3. GitHub 가입 폼." /><br /><span class="image-title" style="font-weight:bold;">4-3. GitHub 가입 폼.</span></p>
 
 <p>그리고 SSH 공개키가 있으면 바로 등록한다. SSH 키를 만드는 방법은 "초 간단 뚝딱" 절에서 이미 설명했다. 그 공개키 파일의 내용을 복사해서 SSH 공개키 입력 박스에 붙여 넣는다. "explain ssh keys"링크를 클릭하면 key를 생성하는 방법이 자세히 설명돼 있다. 주요 운영체제에서 하는 방법이 모두 설명돼 있다. "I agree, sign me up" 버튼을 클릭하면 자신만의 대쉬보드 페이지를 볼 수 있을 것이다.</p>
 
-<p><img src="figures/18333fig0404-tn.png" title="4-4. GitHub 사용자 대쉬보드" alt="4-4. GitHub 사용자 대쉬보드" /></p>
+<p><img src="figures/18333fig0404-tn.png" title="4-4. GitHub 사용자 대쉬보드" alt="4-4. GitHub 사용자 대쉬보드" /><br /><span class="image-title" style="font-weight:bold;">4-4. GitHub 사용자 대쉬보드</span></p>
 
 <p>그리고 저장소를 만들자.</p>
 
@@ -2958,15 +2951,15 @@ gitweb = yes
 
 <p><code>Your Repositories</code>옆에 있는 "create a new one" 링크를 클릭하면 저장소를 만드는 입력 폼을 볼 수 있다(그림 4-5).</p>
 
-<p><img src="figures/18333fig0405-tn.png" title="4-5. GitHub의 저장소를 생성하는 폼." alt="4-5. GitHub의 저장소를 생성하는 폼." /></p>
+<p><img src="figures/18333fig0405-tn.png" title="4-5. GitHub의 저장소를 생성하는 폼." alt="4-5. GitHub의 저장소를 생성하는 폼." /><br /><span class="image-title" style="font-weight:bold;">4-5. GitHub의 저장소를 생성하는 폼.</span></p>
 
 <p>이 폼에 프로젝트 이름과 프로젝트 설명을 적는다. 다 적은 후에 "Create Repository" 버튼을 클릭하면 GitHub에 저장소가 생긴다.</p>
 
-<p><img src="figures/18333fig0406-tn.png" title="4-6. GitHub 프로젝트 정보" alt="4-6. GitHub 프로젝트 정보" /></p>
+<p><img src="figures/18333fig0406-tn.png" title="4-6. GitHub 프로젝트 정보" alt="4-6. GitHub 프로젝트 정보" /><br /><span class="image-title" style="font-weight:bold;">4-6. GitHub 프로젝트 정보</span></p>
 
 <p>이 저장소에는 아직 코드가 없어서 GitHub은 프로젝트를 새로 만드는 방법, 이미 있는 Git 프로젝트를 Push하는 법, 공개된 Subversion 저장소에서 프로젝트를 가져오는(Import) 방법 등을 보여준다.</p>
 
-<p><img src="figures/18333fig0407-tn.png" title="4-7. 새 저장소를 위한 사용설명서" alt="4-7. 새 저장소를 위한 사용설명서" /></p>
+<p><img src="figures/18333fig0407-tn.png" title="4-7. 새 저장소를 위한 사용설명서" alt="4-7. 새 저장소를 위한 사용설명서" /><br /><span class="image-title" style="font-weight:bold;">4-7. 새 저장소를 위한 사용설명서</span></p>
 
 <p>여기 설명하는 내용은 이미 우리가 배웠다. 프로젝트가 없을 때 다음과 같이 프로젝트를 초기화했었다:</p>
 
@@ -2983,7 +2976,7 @@ $ git push origin master
 
 <p>이제 프로젝트가 GitHub에서 서비스되게 하였으니 공유하고 싶은 사람에게 URL을 알려 주면 된다. URL은 <code>http://github.com/testinguser/iphone_project</code>이다. 그리고 이 저장소의 정보를 잘 살펴보면 Git URL이 두 개인 것을 발견할 수 있을 것이다.</p>
 
-<p><img src="figures/18333fig0408-tn.png" title="4-8. 프로젝트의 공개 URL과 비공개 URL." alt="4-8. 프로젝트의 공개 URL과 비공개 URL." /></p>
+<p><img src="figures/18333fig0408-tn.png" title="4-8. 프로젝트의 공개 URL과 비공개 URL." alt="4-8. 프로젝트의 공개 URL과 비공개 URL." /><br /><span class="image-title" style="font-weight:bold;">4-8. 프로젝트의 공개 URL과 비공개 URL.</span></p>
 
 <p><code>Public Clone URL</code>은 말 그대로 누구나 프로젝트를 Clone할 수 있도록 모두에게 읽기 전용으로 공개하는 것이다. 이 URL을 다른 사람에 알려주거나 웹사이트 같은데 공개하는 것을 부담스러워 하지 않아도 된다.</p>
 
@@ -2993,7 +2986,7 @@ $ git push origin master
 
 <p>GitHub는 공개 중인 Subversion 프로젝트를 Git 프로젝트로 만들어 준다. 사용설명서 하단에 있는 "Subversion에서 Import하기" 링크를 클릭하면 임포트 폼을 볼 수 있고 거기에 Subversion 프로젝트의 URL을 넣는다(그림 4-9).</p>
 
-<p><img src="figures/18333fig0409-tn.png" title="4-9. Subversion 프로젝트를 Import하는 화면" alt="4-9. Subversion 프로젝트를 Import하는 화면" /></p>
+<p><img src="figures/18333fig0409-tn.png" title="4-9. Subversion 프로젝트를 Import하는 화면" alt="4-9. Subversion 프로젝트를 Import하는 화면" /><br /><span class="image-title" style="font-weight:bold;">4-9. Subversion 프로젝트를 Import하는 화면</span></p>
 
 <p>프로젝트가 비표준 방식을 사용하거나 규모가 너무 크고 비공개라면, 이 기능을 사용할 수 없다. 7장에서 수동으로 임포트하는 방법에 대해 좀 더 자세히 배울 수 있다.</p>
 
@@ -3003,15 +2996,15 @@ $ git push origin master
 
 <p>프로젝트 페이지에 있는 Admin 버튼을 클릭해서 관리 페이지로 이동한다(그림 4-10).</p>
 
-<p><img src="figures/18333fig0410-tn.png" title="4-10. GitHub의 프로젝트 관리 페이지" alt="4-10. GitHub의 프로젝트 관리 페이지" /></p>
+<p><img src="figures/18333fig0410-tn.png" title="4-10. GitHub의 프로젝트 관리 페이지" alt="4-10. GitHub의 프로젝트 관리 페이지" /><br /><span class="image-title" style="font-weight:bold;">4-10. GitHub의 프로젝트 관리 페이지</span></p>
 
 <p>다른 사람에게 쓰기 권한을 주려면 “Add another collaborator” 링크를 클릭한다. 그러면 텍스트 박스가 새로 나타나는 데 거기에 사용자 이름을 입력한다. 사용자이름을 입력하기 시작하면 자동으로 시스템에 존재하는 사용자를 찾아서 보여 준다. 원하는 사용자를 찾으면 Add 버튼을 클릭해서 그 사용자를 동료로 만든다.</p>
 
-<p><img src="figures/18333fig0411-tn.png" title="4-11. 프로젝트에 동료 추가하기" alt="4-11. 프로젝트에 동료 추가하기" /></p>
+<p><img src="figures/18333fig0411-tn.png" title="4-11. 프로젝트에 동료 추가하기" alt="4-11. 프로젝트에 동료 추가하기" /><br /><span class="image-title" style="font-weight:bold;">4-11. 프로젝트에 동료 추가하기</span></p>
 
 <p>추가한 사람은 동료 목록 박스에서 모두 확인할 수 있다(그림 4-12).</p>
 
-<p><img src="figures/18333fig0412-tn.png" title="4-12. 프로젝트 동료들." alt="4-12. 프로젝트 동료들." /></p>
+<p><img src="figures/18333fig0412-tn.png" title="4-12. 프로젝트 동료들." alt="4-12. 프로젝트 동료들." /><br /><span class="image-title" style="font-weight:bold;">4-12. 프로젝트 동료들.</span></p>
 
 <p>그리고 만약 다시 혼자 작업하고 싶어지면 "revoke" 링크를 클릭하여 쫓아낼 수 있다. 쫓겨나면 더는 Push할 수 없다. 또 나중에 기존 프로젝트에 등록된 동료를 그룹으로 묶어 추가할 수 있다.</p>
 
@@ -3019,7 +3012,7 @@ $ git push origin master
 
 <p>Subversion에서 Import했거나 로컬의 프로젝트를 Push하고 나면 프로젝트 메인 페이지가 그림 4-13같이 바뀐다.</p>
 
-<p><img src="figures/18333fig0413-tn.png" title="4-13. GitHub의 프로젝트 메인 페이지" alt="4-13. GitHub의 프로젝트 메인 페이지" /></p>
+<p><img src="figures/18333fig0413-tn.png" title="4-13. GitHub의 프로젝트 메인 페이지" alt="4-13. GitHub의 프로젝트 메인 페이지" /><br /><span class="image-title" style="font-weight:bold;">4-13. GitHub의 프로젝트 메인 페이지</span></p>
 
 <p>사람들이 이 프로젝트에 방문하면 이 페이지가 제일 처음 보인다. 이 페이지는 몇 가지 탭으로 구성된다. Commits 탭은 지금까지의 커밋을 <code>git log</code> 명령을 실행시킨 것처럼 최신 것부터 보여준다. Network 탭은 프로젝트를 복제한 사람들과 기여한 사람들을 모두 보여준다. Downloads 탭에는 바이너리 파일이나 프로젝트의 태그 버전을 압축해서 올릴 수 있다(역주, 지금은 이 탭이 없다. Gist 페이지에서 비슷한 기능을 제공한다). Wiki 탭은 프로젝트에 대한 정보나 문서를 쓰는 곳이다. Graphs 탭은 사람들의 활동을 그림과 통계로 보여준다. 메인 탭인 Source 탭은 프로젝트의 메인 디렉토리를 보여주고 README 파일이 있으면 자동으로 화면에 출력해 준다. 그리고 마지막 커밋 내용도 함께 보여준다.</p>
 
@@ -3031,11 +3024,11 @@ $ git push origin master
 
 <p>프로젝트 페이지에 들어가서 상단의 "fork" 버튼을 클릭하여 프로젝트를 복제한다(그림 4-14). 그림 4-14의 예는 mojombo/chronic 프로젝트 페이지이다.</p>
 
-<p><img src="figures/18333fig0414-tn.png" title="4-14. 어떤 저장소든지 &quot;fork&quot; 버튼을 클릭하면 Push할 수 있는 저장소를 얻을 수 있다." alt="4-14. 어떤 저장소든지 &quot;fork&quot; 버튼을 클릭하면 Push할 수 있는 저장소를 얻을 수 있다." /></p>
+<p><img src="figures/18333fig0414-tn.png" title="4-14. 어떤 저장소든지 &quot;fork&quot; 버튼을 클릭하면 Push할 수 있는 저장소를 얻을 수 있다." alt="4-14. 어떤 저장소든지 &quot;fork&quot; 버튼을 클릭하면 Push할 수 있는 저장소를 얻을 수 있다." /><br /><span class="image-title" style="font-weight:bold;">4-14. 어떤 저장소든지 "fork" 버튼을 클릭하면 Push할 수 있는 저장소를 얻을 수 있다.</span></p>
 
 <p>클릭하는 순간, 이 프로젝트를 즉시 Fork한다(그림 4-15).</p>
 
-<p><img src="figures/18333fig0415-tn.png" title="4-15. Fork한 프로젝트" alt="4-15. Fork한 프로젝트" /></p>
+<p><img src="figures/18333fig0415-tn.png" title="4-15. Fork한 프로젝트" alt="4-15. Fork한 프로젝트" /><br /><span class="image-title" style="font-weight:bold;">4-15. Fork한 프로젝트</span></p>
 
 <h3>GitHub 요약</h3>
 
@@ -3062,7 +3055,7 @@ $ git push origin master
 
 <p>중앙집중식 시스템에서는 보통 중앙집중식 협업 모델이라는 한 가지 방식밖에 없다. 하나의 중앙 저장소가 존재하고 모든 변경 사항은 이 중앙 저장소로 집중된다. 모든 개발자는 이 중앙 저장소를 기준으로 한다. 즉, 개발자 다수는 이 하나의 중앙 저장소를 중심으로 작업을 한다(그림 5-1)</p>
 
-<p><img src="figures/18333fig0501-tn.png" title="5-1. 중앙집중식 Workflow." alt="5-1. 중앙집중식 Workflow." /></p>
+<p><img src="figures/18333fig0501-tn.png" title="5-1. 중앙집중식 Workflow." alt="5-1. 중앙집중식 Workflow." /><br /><span class="image-title" style="font-weight:bold;">5-1. 중앙집중식 Workflow.</span></p>
 
 <p>중앙집중식에서 개발자 두 명이 중앙저장소를 Clone하고 각자 수정하는 상황을 생각해보자. 한 개발자가 한 일을 커밋하고 나서 아무 문제 없이 서버에 Push한다. 그러면 다른 개발자는 한 일을 커밋하고 Push하기 전에 첫 번째 개발자가 한 일을 먼저 Merge해야 한다. Merge를 해야 첫 번째 개발자가 작업한 내용을 덮어쓰지 않는다. 이런 개념은 Subversion과 같은 중앙집중식 버전 관리 시스템에서 사용하는 방식이고 Git에서도 당연히 이런 Workflow를 사용할 수 있다.</p>
 
@@ -3082,7 +3075,7 @@ $ git push origin master
 </ol>
 
 
-<p><img src="figures/18333fig0502-tn.png" title="5-2. Integration-Manager Workflow" alt="5-2. Integration-Manager Workflow" /></p>
+<p><img src="figures/18333fig0502-tn.png" title="5-2. Integration-Manager Workflow" alt="5-2. Integration-Manager Workflow" /><br /><span class="image-title" style="font-weight:bold;">5-2. Integration-Manager Workflow</span></p>
 
 <p>이런 방식은 GitHub 같은 사이트에서 일반적으로 사용하는 방식이다. GitHub는 프로젝트를 Fork하고 수정사항을 반영하여 다시 모두에게 공개하기 좋은 구조로 되어 있다. 이 방식의 장점은 기여자와 Integration-Manager가 각자의 사정에 맞춰 프로젝트를 유지할 수 있다는 점이다. 기여자는 자신의 저장소와 브랜치에서 수정 작업을 계속해 나갈 수 있고 수정사항이 프로젝트에 반영되도록 기다릴 필요가 없다. 그냥 커밋을 Push해 놓으면 관리자는 여유를 가지고 적절한 시점에 Merge한다.</p>
 
@@ -3098,7 +3091,7 @@ $ git push origin master
 </ol>
 
 
-<p><img src="figures/18333fig0503-tn.png" title="5-3. Benevolent dictator Workflow" alt="5-3. Benevolent dictator Workflow" /></p>
+<p><img src="figures/18333fig0503-tn.png" title="5-3. Benevolent dictator Workflow" alt="5-3. Benevolent dictator Workflow" /><br /><span class="image-title" style="font-weight:bold;">5-3. Benevolent dictator Workflow</span></p>
 
 <p>이 방식이 일반적이지 않지만 깊은 계층 구조를 가지는 환경이나 규모가 큰 프로젝트에서는 매우 쓸모 있다. 프로젝트 리더가 모든 코드를 통합하기 전에 코드를 부분부분 통합하도록 여러 명의 Lieutenant에게 위임할 수 있다.</p>
 
@@ -3135,7 +3128,7 @@ lib/simplegit.rb:26: trailing whitespace.
 
 <p>커밋을 하기 전에 공백문자에 대해 검사를 하면 공백으로 불필요하게 커밋되는 것을 막고 이런 커밋으로 인해 불필요하게 다른 개발자들이 신경 쓰는 일을 방지할 수 있다.</p>
 
-<p>그리고 각 커밋은 논리적으로 구분되는 Changeset이다. 최대한 수정사항을 하나의 주제로 요약할 수 있어야 하고 여러 가지 이슈에 대한 수정사항을 전부 하나의 커밋에 담지 않아야 한다. 여러 가지 이슈를 한꺼번에 수정했다고 하더라도 Stage 영역으로 하나의 이슈를 하나의 커밋으로 나누어 커밋을 의미 있게 만들 수 있다. 같은 파일의 다른 부분을 수정하는 경우에는 <code>git add -patch</code> 명령을 써서 한 부분씩 나누어 Stage 영역에 저장해야 한다(관련 내용은 6장에서 다룰 것이다). 결과적으로 최종 프로젝트의 모습은 한 번에 커 믿을 하든 다섯 번에 나누어 커밋을 하든 똑같다. 하지만, 여러 번에 나누어 커밋하는 것이 다른 동료가 수정한 부분을 확인할 때나 각 커밋의 시점으로 복원해서 검토할 때에 이해하기 훨씬 쉽다. 6장에서는 이미 저장된 커밋을 다시 수정하거나 파일들을 단계적으로 Stage영역에 저장하는 방법을 살펴볼 것이다. 여러 가지 도구를 이용해서 간단하고 이해하기 쉬운 커밋을 쌓아가야 한다.</p>
+<p>그리고 각 커밋은 논리적으로 구분되는 Changeset이다. 최대한 수정사항을 하나의 주제로 요약할 수 있어야 하고 여러 가지 이슈에 대한 수정사항을 전부 하나의 커밋에 담지 않아야 한다. 여러 가지 이슈를 한꺼번에 수정했다고 하더라도 나중에 Stage 영역을 이용하여 한 커밋에 하나의 이슈만 담기도록 작업 내용을 분할하고, 각 커밋마다 적절한 메시지를 작성한다. 같은 파일의 다른 부분을 수정하는 경우에는 <code>git add -patch</code> 명령을 써서 한 부분씩 나누어 Stage 영역에 저장해야 한다(관련 내용은 6장에서 다룰 것이다). 결과적으로 최종 프로젝트의 모습은 한 번에 커밋을 하든 다섯 번에 나누어 커밋을 하든 똑같다. 하지만, 여러 번에 나누어 커밋하는 것이 다른 동료가 수정한 부분을 확인할 때나 각 커밋의 시점으로 복원해서 검토할 때에 이해하기 훨씬 쉽다. 6장에서는 이미 저장된 커밋을 다시 수정하거나 파일들을 단계적으로 Stage영역에 저장하는 방법을 살펴볼 것이다. 여러 가지 도구를 이용해서 간단하고 이해하기 쉬운 커밋을 쌓아가야 한다.</p>
 
 <p>마지막으로 명심해야 할 점은 커밋 메시지 자체다. 좋은 커밋 메시지를 작성하는 습관은 Git을 사용하는 데 도움이 많이 된다. 커밋 메시지 작성하는 보편적인 규칙이 있다. 메시지의 첫 줄에 50자가 넘지 않는 아주 간략한 메시지를 적어 해당 커밋을 요약한다. 다음 한 줄은 비우고 그다음 줄부터 커밋을 자세히 설명한다. 예를 들어 Git 개발 프로젝트에서는 개발 동기와 구현 상황의 제약조건이나 상황 등을 자세하게 요구한다. 이런 점은 따를 만한 좋은 가이드라인이다. 그리고 현재형 표현을 사용하는 것이 좋다. 예를 들어 "I added tests for (테스트를 추가함)" 보다는 "Add tests for (테스트 추가)" 와 같은 메시지를 작성한다. 아래 예제는 Pope_at_tpope.net이 작성한 커밋 메시지이다.</p>
 
@@ -3216,8 +3209,7 @@ From john@githost:simplegit
 
 <p>Fetch하고 나면 John씨의 로컬 저장소는 그림 5-4와 같이 된다.</p>
 
-<p>Insert 18333fig0504.png
-Figure 5-4. Fetch하고 난 John씨의 저장소.</p>
+<p><img src="figures/18333fig0504-tn.png" title="5-4. Fetch하고 난 John씨의 저장소." alt="5-4. Fetch하고 난 John씨의 저장소." /><br /><span class="image-title" style="font-weight:bold;">5-4. Fetch하고 난 John씨의 저장소.</span></p>
 
 <p>John씨는 Jessica씨가 저장소로 Push했던 커밋이 있는 브랜치를 로컬 저장소로 가져왔다. 하지만, Push를 하기 전에 Fetch한 브랜치를 Merge해야 한다:</p>
 
@@ -3229,8 +3221,7 @@ Merge made by recursive.
 
 <p>Merge가 잘 이루어지면 John씨의 브랜치는 그림 5-5와 같은 상태가 된다.</p>
 
-<p>Insert 18333fig0505.png
-Figure 5-5. origin/master 브랜치를 Merge하고 난 후, John씨의 저장소.</p>
+<p><img src="figures/18333fig0505-tn.png" title="5-5. origin/master 브랜치를 Merge하고 난 후, John씨의 저장소." alt="5-5. origin/master 브랜치를 Merge하고 난 후, John씨의 저장소." /><br /><span class="image-title" style="font-weight:bold;">5-5. origin/master 브랜치를 Merge하고 난 후, John씨의 저장소.</span></p>
 
 <p>John씨는 Merge하고 나서 자신이 작업한 코드가 제대로 동작하는지 확인하고 공유하는 저장소로 Push한다:</p>
 
@@ -3242,13 +3233,11 @@ To john@githost:simplegit.git
 
 <p>이제 John씨의 저장소는 그림 5-6 처럼 되었다.</p>
 
-<p>Insert 18333fig0506.png
-Figure 5-6. Push하고 난 후, John씨의 저장소.</p>
+<p><img src="figures/18333fig0506-tn.png" title="5-6. Push하고 난 후, John씨의 저장소." alt="5-6. Push하고 난 후, John씨의 저장소." /><br /><span class="image-title" style="font-weight:bold;">5-6. Push하고 난 후, John씨의 저장소.</span></p>
 
 <p>동시에 Jessica씨는 토픽 브랜치를 하나 만들었다. issue54 브랜치를 만들고 세 번에 걸쳐서 커밋을 했다. 아직 John씨의 커밋을 Fetch하지 않은 상황이기 때문에 그림 5-7과 같은 상황이 된다.</p>
 
-<p>Insert 18333fig0507.png
-Figure 5-7. Jessica씨의 저장소.</p>
+<p><img src="figures/18333fig0507-tn.png" title="5-7. Jessica씨의 저장소." alt="5-7. Jessica씨의 저장소." /><br /><span class="image-title" style="font-weight:bold;">5-7. Jessica씨의 저장소.</span></p>
 
 <p>Jessica씨는 John씨의 작업을 적용하기 위해 Fetch를 먼저 한다:</p>
 
@@ -3261,8 +3250,7 @@ From jessica@githost:simplegit
 
 <p>위 명령을 통해 John씨가 Push한 커밋을 모두 내려받는다. 그리고 나서 Jessica씨의 저장소는 그림 5-8과 같은 상태가 될 것이다.</p>
 
-<p>Insert 18333fig0508.png
-Figure 5-8. John씨의 커밋을 Fetch한 후 Jessica씨의 저장소.</p>
+<p><img src="figures/18333fig0508-tn.png" title="5-8. John씨의 커밋을 Fetch한 후 Jessica씨의 저장소." alt="5-8. John씨의 커밋을 Fetch한 후 Jessica씨의 저장소." /><br /><span class="image-title" style="font-weight:bold;">5-8. John씨의 커밋을 Fetch한 후 Jessica씨의 저장소.</span></p>
 
 <p>Jessica씨는 토픽 브랜치의 작업을 마치고 만약 origin/master와 Merge를 하게 되면 어떤 내용이 Merge될 지, <code>git log</code> 명령으로 확인한다:</p>
 
@@ -3302,7 +3290,7 @@ Merge made by recursive.
 
 <p>위와 같이 Merge가 잘 되면 그림 5-9와 같은 상태가 된다.</p>
 
-<p><img src="figures/18333fig0509-tn.png" title="5-9. Merge 이후 Jessica씨의 저장소." alt="5-9. Merge 이후 Jessica씨의 저장소." /></p>
+<p><img src="figures/18333fig0509-tn.png" title="5-9. Merge 이후 Jessica씨의 저장소." alt="5-9. Merge 이후 Jessica씨의 저장소." /><br /><span class="image-title" style="font-weight:bold;">5-9. Merge 이후 Jessica씨의 저장소.</span></p>
 
 <p>origin/master 브랜치가 Jessica씨의 master 브랜치로 나아갈(reachable) 수 있기 때문에 Push는 성공한다(물론 John씨가 그 사이에 Push를 하지 않았다면):</p>
 
@@ -3314,11 +3302,11 @@ To jessica@githost:simplegit.git
 
 <p>두 개발자의 커밋과 Merge가 성공적으로 이루어지고 난 후의 결과는 5-10과 같다.</p>
 
-<p><img src="figures/18333fig0510-tn.png" title="5-10. Jessica씨가 서버로 Push하고 난 후의 저장소." alt="5-10. Jessica씨가 서버로 Push하고 난 후의 저장소." /></p>
+<p><img src="figures/18333fig0510-tn.png" title="5-10. Jessica씨가 서버로 Push하고 난 후의 저장소." alt="5-10. Jessica씨가 서버로 Push하고 난 후의 저장소." /><br /><span class="image-title" style="font-weight:bold;">5-10. Jessica씨가 서버로 Push하고 난 후의 저장소.</span></p>
 
 <p>여기서 살펴본 예제가 가장 간단한 상황이다. 토픽 브랜치에서 수정하고 로컬의 master 브랜치에 Merge를 한다. 작업한 내용을 프로젝트의 공유 저장소에 Push하고자 할 때에는 우선 origin/master 브랜치를 Fetch하고 Merge한다. 그리고 나서 Merge한 결과를 다시 서버로 Push한다. 이런 일반적인 Workflow은 그림 5-11로 나타낼 수 있다.</p>
 
-<p><img src="figures/18333fig0511-tn.png" title="5-11. 여러 개발자가 Git을 사용하는 일반적인 Workflow" alt="5-11. 여러 개발자가 Git을 사용하는 일반적인 Workflow" /></p>
+<p><img src="figures/18333fig0511-tn.png" title="5-11. 여러 개발자가 Git을 사용하는 일반적인 Workflow" alt="5-11. 여러 개발자가 Git을 사용하는 일반적인 Workflow" /><br /><span class="image-title" style="font-weight:bold;">5-11. 여러 개발자가 Git을 사용하는 일반적인 Workflow</span></p>
 
 <h3>비공개 대규모 팀</h3>
 
@@ -3367,8 +3355,7 @@ $ git commit -am 'add ls-files'
 
 <p>Jessica씨의 저장소는 그림 5-12과 같을 것이다.</p>
 
-<p>Insert 18333fig0512.png
-Figure 5-12. Jessica씨의 저장소.</p>
+<p><img src="figures/18333fig0512-tn.png" title="5-12. Jessica씨의 저장소." alt="5-12. Jessica씨의 저장소." /><br /><span class="image-title" style="font-weight:bold;">5-12. Jessica씨의 저장소.</span></p>
 
 <p>작업을 마치고 Push하려고 하는데 Jesie씨가 이미 일부 작업을 하고 서버에 featureBee 브랜치로 Push했다는 이메일을 보내왔다. 그러므로 Jessica씨는 Jesie씨의 작업을 먼저 Merge해야만 Push할 수 있다. Merge하기 위해서 우선 <code>git fetch</code>로 Fetch한다:</p>
 
@@ -3439,15 +3426,15 @@ To jessica@githost:simplegit.git
 
 <p>위와 같은 작업을 마치고 나면 Jessica씨의 저장소는 그림 5-13과 같은 모습이 된다.</p>
 
-<p><img src="figures/18333fig0513-tn.png" title="5-13. 마지막 Push하고 난 후의 Jessica씨의 저장소" alt="5-13. 마지막 Push하고 난 후의 Jessica씨의 저장소" /></p>
+<p><img src="figures/18333fig0513-tn.png" title="5-13. 마지막 Push하고 난 후의 Jessica씨의 저장소" alt="5-13. 마지막 Push하고 난 후의 Jessica씨의 저장소" /><br /><span class="image-title" style="font-weight:bold;">5-13. 마지막 Push하고 난 후의 Jessica씨의 저장소</span></p>
 
 <p>featureA와 featureBee 브랜치가 프로젝트의 메인 브랜치로 Merge할 준비가 되었다고 Integration-Manager에게 알려준다. Integration-Manager가 두 브랜치를 모두 Merge하고 난 후에 메인 브랜치를 Fetch해 오면 그림 5-14와 같은 모양이 돼 있을 것이다.</p>
 
-<p><img src="figures/18333fig0514-tn.png" title="5-14. 두 브랜치가 메인 브랜치에 Merge된 후의 저장소." alt="5-14. 두 브랜치가 메인 브랜치에 Merge된 후의 저장소." /></p>
+<p><img src="figures/18333fig0514-tn.png" title="5-14. 두 브랜치가 메인 브랜치에 Merge된 후의 저장소." alt="5-14. 두 브랜치가 메인 브랜치에 Merge된 후의 저장소." /><br /><span class="image-title" style="font-weight:bold;">5-14. 두 브랜치가 메인 브랜치에 Merge된 후의 저장소.</span></p>
 
 <p>수많은 팀의 작업을 동시에 진행하고 나중에 Merge하는, 이런 기능을 사용하기 위해 다른 버전 관리 시스템에서 Git으로 바꾸는 조직들이 많아지고 있다. 작은 팀이 자신의 브랜치로 작업하면서 메인 브랜치에 영향을 끼치지 않는다는 점이 Git의 장점이다. 그림 5-15는 이런 Workflow을 나타내고 있다.</p>
 
-<p><img src="figures/18333fig0515-tn.png" title="5-15. 대규모 팀의 Workflow." alt="5-15. 대규모 팀의 Workflow." /></p>
+<p><img src="figures/18333fig0515-tn.png" title="5-15. 대규모 팀의 Workflow." alt="5-15. 대규모 팀의 Workflow." /><br /><span class="image-title" style="font-weight:bold;">5-15. 대규모 팀의 Workflow.</span></p>
 
 <h3>공개 소규모 팀</h3>
 
@@ -3511,7 +3498,7 @@ $ git fetch origin
 
 <p>그림 5-16 처럼 각 토픽은 일종의 실험실이라고 할 수 있다. 각 토픽은 서로 방해하지 않고 독립적으로 커밋을 수정하거나 Rebase할 수 있다.</p>
 
-<p><img src="figures/18333fig0516-tn.png" title="5-16. featureB 수정작업이 끝난 직후 저장소의 모습." alt="5-16. featureB 수정작업이 끝난 직후 저장소의 모습." /></p>
+<p><img src="figures/18333fig0516-tn.png" title="5-16. featureB 수정작업이 끝난 직후 저장소의 모습." alt="5-16. featureB 수정작업이 끝난 직후 저장소의 모습." /><br /><span class="image-title" style="font-weight:bold;">5-16. featureB 수정작업이 끝난 직후 저장소의 모습.</span></p>
 
 <p>프로젝트 관리자가 사람들의 수정사항을 Merge하고 나서 Jessica씨의 브랜치를 Merge하려고 할 때 충돌이 발생할 수도 있다. 그러면 Jessica씨가 자신의 브랜치를 origin/master에 Rebase해서 충돌을 해결하고 다시 Pull Request을 보낸다:</p>
 
@@ -3522,7 +3509,7 @@ $ git push -f myfork featureA
 
 <p>위 명령들을 실행하고 나면 그림 5-17과 같아진다.</p>
 
-<p><img src="figures/18333fig0517-tn.png" title="5-17. FeatureA에 대한 Rebase가 적용된 후의 모습" alt="5-17. FeatureA에 대한 Rebase가 적용된 후의 모습" /></p>
+<p><img src="figures/18333fig0517-tn.png" title="5-17. FeatureA에 대한 Rebase가 적용된 후의 모습" alt="5-17. FeatureA에 대한 Rebase가 적용된 후의 모습" /><br /><span class="image-title" style="font-weight:bold;">5-17. FeatureA에 대한 Rebase가 적용된 후의 모습</span></p>
 
 <p>브랜치를 Rebase해 버렸기 때문에 Push할 때 -f 옵션을 주고 강제로 기존에 서버에 있던 브랜치의 내용을 덮어 써야 한다. 아니면 새로운 브랜치를(예를 들어 featureAv2) 서버에 Push해도 된다.</p>
 
@@ -3541,7 +3528,7 @@ $ git push myfork featureBv2
 
 <p>수정을 마치면 관리자에게 featureBv2 브랜치를 확인해 보라고 메시지를 보낸다 (그림 5-18 참고).</p>
 
-<p><img src="figures/18333fig0518-tn.png" title="5-18. featureBv2 브랜치를 Commit한 이후 저장소의 모습." alt="5-18. featureBv2 브랜치를 Commit한 이후 저장소의 모습." /></p>
+<p><img src="figures/18333fig0518-tn.png" title="5-18. featureBv2 브랜치를 Commit한 이후 저장소의 모습." alt="5-18. featureBv2 브랜치를 Commit한 이후 저장소의 모습." /><br /><span class="image-title" style="font-weight:bold;">5-18. featureBv2 브랜치를 Commit한 이후 저장소의 모습.</span></p>
 
 <h3>대규모 공개 프로젝트</h3>
 
@@ -3690,7 +3677,7 @@ error: ticgit.gemspec: patch does not apply
 
 <h4>am 명령을 사용하는 방법</h4>
 
-<p>프로젝트 기여자가 Git의 format-patch 명령을 잘 사용하면 경우 관리자의 작업은 훨씬 쉬워진다. format-patch 명령으로 만든 Patch 파일은 기여자의 정보와 커밋 정보가 포함되어 있기 때문이다. 그래서 기여자가 diff보다 format-patch를 사용하도록 권해야 한다. <code>git apply</code>는 기존의 Patch파일에만 사용한다.</p>
+<p>프로젝트 기여자가 Git의 format-patch 명령을 잘 사용하면 관리자의 작업은 훨씬 쉬워진다. format-patch 명령으로 만든 Patch 파일은 기여자의 정보와 커밋 정보가 포함되어 있기 때문이다. 그래서 기여자가 diff보다 format-patch를 사용하도록 권해야 한다. <code>git apply</code>는 기존의 Patch파일에만 사용한다.</p>
 
 <p>format-patch 명령으로 생성한 Patch 파일은 <code>git am</code> 명령으로 적용한다. <code>git am</code>은 여러 통의 메일이 들어 있는 mbox파일을 읽어서 Patch한다. mbox파일은 간단한 텍스트 파일이고 그 내용은 다음과 같다:</p>
 
@@ -3841,7 +3828,7 @@ Date:   Mon Oct 22 19:38:36 2008 -0700
 $ git diff 36c7db 
 </code></pre>
 
-<p>이 방법으로 원하는 결과를 얻을 수 있지만, 사용법이 불편하다. Git은 Triple-Dot으로 간단하게 위와 같이 비교하는 방법을 지원한다. diff 명령을 사용할 때 두 브랜치 사이에 ...를 한쪽 브랜치에만 있는 것을 살펴볼 수 있다:</p>
+<p>이 방법으로 원하는 결과를 얻을 수 있지만, 사용법이 불편하다. Git은 Triple-Dot으로 간단하게 위와 같이 비교하는 방법을 지원한다. diff 명령을 사용할 때 두 브랜치 사이에 ...를 쓰면, 두 브랜치의 공통 조상과 현재 브랜치의 마지막 커밋을 비교한다.:</p>
 
 <pre><code>$ git diff master...contrib
 </code></pre>
@@ -3856,19 +3843,19 @@ $ git diff 36c7db
 
 <p>바로 master 브랜치에 Merge하는 것이 가장 간단하다. 이 Workflow에서는 master 브랜치가 안전한 코드라고 가정해야 한다. 토픽 브랜치를 검증하고 master 브랜치로 Merge할 때마다 토픽 브랜치를 삭제한다. 그림 5-19처럼 <code>ruby_client</code> 브랜치와 <code>php_client</code> 브랜치가 있을 때 <code>ruby_client</code> 브랜치를 master 브랜치로 Merge한 후 <code>php_client</code> 브랜치를 Merge하면 그림 5-20과 같아진다.</p>
 
-<p><img src="figures/18333fig0519-tn.png" title="5-19. 저장소의 두 브랜치." alt="5-19. 저장소의 두 브랜치." /></p>
+<p><img src="figures/18333fig0519-tn.png" title="5-19. 저장소의 두 브랜치." alt="5-19. 저장소의 두 브랜치." /><br /><span class="image-title" style="font-weight:bold;">5-19. 저장소의 두 브랜치.</span></p>
 
-<p><img src="figures/18333fig0520-tn.png" title="5-20. Merge한 후의 저장소." alt="5-20. Merge한 후의 저장소." /></p>
+<p><img src="figures/18333fig0520-tn.png" title="5-20. Merge한 후의 저장소." alt="5-20. Merge한 후의 저장소." /><br /><span class="image-title" style="font-weight:bold;">5-20. Merge한 후의 저장소.</span></p>
 
 <p>이 Workflow은 간단하지만, 프로젝트의 규모가 커지면 문제가 생길 수 있다.</p>
 
 <p>개발자가 많고 규모가 큰 프로젝트에서는 두 단계로 Merge하는 것이 좋다. 그래서 긴 호흡 브랜치를 두 개로 유지해야 한다. master 브랜치는 아주 안정적인 버전을 Release하기 위해서 사용하고 develop 브랜치는 새로 수정된 코드들을 통합할 때 사용한다. 그리고 두 브랜치를 모두 저장소에 Push한다. 우선 develop 브랜치에 토픽 브랜치(그림 5-21)를 그림 5-22과 같이 Merge한다. 그 후에 Release해도 될만한 수준이 되면 master 브랜치를 develop 브랜치까지 Fast-forward시킨다(그림 5-23).</p>
 
-<p><img src="figures/18333fig0521-tn.png" title="5-21. 토픽 브랜치를 Merge하기 전." alt="5-21. 토픽 브랜치를 Merge하기 전." /></p>
+<p><img src="figures/18333fig0521-tn.png" title="5-21. 토픽 브랜치를 Merge하기 전." alt="5-21. 토픽 브랜치를 Merge하기 전." /><br /><span class="image-title" style="font-weight:bold;">5-21. 토픽 브랜치를 Merge하기 전.</span></p>
 
-<p><img src="figures/18333fig0522-tn.png" title="5-22. 토픽 브랜치를 Merge한 후." alt="5-22. 토픽 브랜치를 Merge한 후." /></p>
+<p><img src="figures/18333fig0522-tn.png" title="5-22. 토픽 브랜치를 Merge한 후." alt="5-22. 토픽 브랜치를 Merge한 후." /><br /><span class="image-title" style="font-weight:bold;">5-22. 토픽 브랜치를 Merge한 후.</span></p>
 
-<p><img src="figures/18333fig0523-tn.png" title="5-23. 토픽 브랜치를 Release한 후." alt="5-23. 토픽 브랜치를 Release한 후." /></p>
+<p><img src="figures/18333fig0523-tn.png" title="5-23. 토픽 브랜치를 Release한 후." alt="5-23. 토픽 브랜치를 Release한 후." /><br /><span class="image-title" style="font-weight:bold;">5-23. 토픽 브랜치를 Release한 후.</span></p>
 
 <p>이 Workflow을 사용하면 개발자들은 프로젝트 저장소를 Clone하고 나서 안정 버전이 필요할 때에는 master 브랜치를 빌드하고 안정적이지 않더라도 좀 더 최신 버전이 필요할 때에는 develop 브랜치를 Checkout하여 빌드할 수 있다. 이 개념을 좀 더 확장해서 토픽 브랜치를 검증하기 위한 integrate 브랜치를 만들어 Merge하고 토픽 브랜치가 검증되면 develop 브랜치에 머지한다. 그리고 develop 브랜치에서 충분히 안정하다는 것이 증명되면 그때 master 브랜치에 Merge한다.</p>
 
@@ -3876,11 +3863,11 @@ $ git diff 36c7db
 
 <p>Git을 개발하는 프로젝트는 긴 호흡의 브랜치를 4개 운영한다. 각 브랜치 이름은 master, next, pu (Proposed Updates), maint 이다. maint는 마지막으로 Release한 버전을 지원하기 위한 브랜치이다. 기여자들이 새로운 기능을 제안하면 관리자는 그림 5-24처럼 자신의 저장소에 토픽 브랜치를 만들어 관리한다. 그리고 각 토픽이 부족한 점이 없는지 안정적인지 계속 테스트한다. 안정화되면 next로 Merge하고 저장소에 Push한다. 그러면 모두가 잘 통합됐는지 확인할 수 있게 된다.</p>
 
-<p><img src="figures/18333fig0524-tn.png" title="5-24. 토픽 브랜치를 동시에 여러 개 관리하는 것은 복잡하다." alt="5-24. 토픽 브랜치를 동시에 여러 개 관리하는 것은 복잡하다." /></p>
+<p><img src="figures/18333fig0524-tn.png" title="5-24. 토픽 브랜치를 동시에 여러 개 관리하는 것은 복잡하다." alt="5-24. 토픽 브랜치를 동시에 여러 개 관리하는 것은 복잡하다." /><br /><span class="image-title" style="font-weight:bold;">5-24. 토픽 브랜치를 동시에 여러 개 관리하는 것은 복잡하다.</span></p>
 
 <p>토픽 브랜치가 좀 더 개선돼야 하면 next가 아니라 pu에 Merge한다. 그 후에 충분히 검증을 마치면 pu에서 next로 옮기고 next를 기반으로 pu를 다시 만든다. next에는 아직 master에 넣기에 모자라 보이는 것들이 들어 있다. 즉 next 브랜치는 정말 가끔 Rebase하고 pu는 자주 Rebase하지만 master는 항상 Fast-forward한다(그림 5-25).</p>
 
-<p><img src="figures/18333fig0525-tn.png" title="5-25. 토픽 브랜치를 긴 호흡의 통합 브랜치로 Merge하기." alt="5-25. 토픽 브랜치를 긴 호흡의 통합 브랜치로 Merge하기." /></p>
+<p><img src="figures/18333fig0525-tn.png" title="5-25. 토픽 브랜치를 긴 호흡의 통합 브랜치로 Merge하기." alt="5-25. 토픽 브랜치를 긴 호흡의 통합 브랜치로 Merge하기." /><br /><span class="image-title" style="font-weight:bold;">5-25. 토픽 브랜치를 긴 호흡의 통합 브랜치로 Merge하기.</span></p>
 
 <p>토픽 브랜치가 결국 master 브랜치로 Merge되면 저장소에서 결국 삭제된다. 그리고 이전 Release 버전에 Patch가 필요하면 maint 브랜치를 이용해 대응한다. Git을 개발하는 프로젝트를 Clone하면 브랜치가 4개 있고 각 브랜치를 이용하여 진행사항을 확인해볼 수 있다. 그래서 새로운 기능을 추가하려면 적당한 브랜치를 보고 고르면 된다. 이 Workflow는 잘 구조화돼 있어서 코드가 새로 추가돼도 테스트하기 쉽다.</p>
 
@@ -3890,7 +3877,7 @@ $ git diff 36c7db
 
 <p>한 브랜치에서 다른 브랜치로 작업한 내용을 옮기는 또 다른 방식으로 Cherry-pick이란 것도 있다. Git의 Cherry-pick은 하나의 커밋만 Rebase하는 것이다. 하나의 커밋에서 Patch 내용을 만들어 현재 브랜치에 적용을 하는 것이다. 토픽 브랜치에 있는 커밋중에서 하나만 고르거나 토픽 브랜치에 커밋이 하나밖에 없을 때 Rebase보다 유용하다. 그림 5-26의 예를 들어보자.</p>
 
-<p><img src="figures/18333fig0526-tn.png" title="5-26. Cherry-pick을 실행하기 전의 저장소." alt="5-26. Cherry-pick을 실행하기 전의 저장소." /></p>
+<p><img src="figures/18333fig0526-tn.png" title="5-26. Cherry-pick을 실행하기 전의 저장소." alt="5-26. Cherry-pick을 실행하기 전의 저장소." /><br /><span class="image-title" style="font-weight:bold;">5-26. Cherry-pick을 실행하기 전의 저장소.</span></p>
 
 <p>e43a6 커밋 하나만 현재 브랜치에 적용하려면 다음과 같은 명령을 실행한다:</p>
 
@@ -3902,7 +3889,7 @@ Finished one cherry-pick.
 
 <p>위 명령을 실행하면 e43a6 커밋에서 변경된 내용을 현재 브랜치에 똑같이 적용을 한다. 하지만, 변경을 적용한 시점이 다르므로 새 커밋의 SHA-1 해시 값은 달라진다. 명령을 실행하고 나면 그림 5-27과 같이 될 것이다.</p>
 
-<p><img src="figures/18333fig0527-tn.png" title="5-27. Cherry-pick 방식으로 커밋 하나를 적용한 후의 저장소." alt="5-27. Cherry-pick 방식으로 커밋 하나를 적용한 후의 저장소." /></p>
+<p><img src="figures/18333fig0527-tn.png" title="5-27. Cherry-pick 방식으로 커밋 하나를 적용한 후의 저장소." alt="5-27. Cherry-pick 방식으로 커밋 하나를 적용한 후의 저장소." /><br /><span class="image-title" style="font-weight:bold;">5-27. Cherry-pick 방식으로 커밋 하나를 적용한 후의 저장소.</span></p>
 
 <p>Rebase나 Cherry-pick 방식으로 토픽 브랜치의 내용을 합치고 나면, 필요없는 토픽 브랜치나 커밋을 삭제한다.</p>
 
@@ -3942,7 +3929,7 @@ sub   2048g/45D02282 2009-02-09 [expires: 2010-02-09]
 <pre><code>$ git show maintainer-pgp-pub | gpg --import
 </code></pre>
 
-<p>사람들은 이렇게 공개키를 얻어서 서명된 태그를 확인할 수 있다. 또한, 관리자가 태그 메시지에 서명을 확인하는 방법을 적어 놓으면 사람들은 `git show <tag>'으로 어떻게 서명된 태그를 확인해야 하는지 알 수 있다.</p>
+<p>사람들은 이렇게 공개키를 얻어서 서명된 태그를 확인할 수 있다. 또한, 관리자가 태그 메시지에 서명을 확인하는 방법을 적어 놓으면 사람들은 <code>git show &lt;tag&gt;</code>으로 어떻게 서명된 태그를 확인해야 하는지 알 수 있다.</p>
 
 <h3>빌드넘버 만들기</h3>
 
@@ -4202,9 +4189,9 @@ Date:   Fri Nov 7 13:47:59 2008 -0500
 
 <p>범위를 표현하는 문법으로 Double Dot(..)을 많이 쓴다. Double Dot은 어떤 커밋들이 한쪽에는 관련됐고 다른 쪽에는 관련되지 않았는지 Git에게 물어보는 것이다. 예들 들어 그림 6-1과 같은 커밋 히스토리가 있다고 가정하자.</p>
 
-<p><img src="figures/18333fig0601-tn.png" title="6-1. 범위를 설명하는 데 사용할 예제" alt="6-1. 범위를 설명하는 데 사용할 예제" /></p>
+<p><img src="figures/18333fig0601-tn.png" title="6-1. 범위를 설명하는 데 사용할 예제" alt="6-1. 범위를 설명하는 데 사용할 예제" /><br /><span class="image-title" style="font-weight:bold;">6-1. 범위를 설명하는 데 사용할 예제</span></p>
 
-<p>experiment 브랜치의 커밋들 중에서 아직 master 브랜치에 Merge하지 않은 것들만 보고 싶으면 <code>master..experiment</code>라고 사용한다. 이 표현은 "master에는 있지만, experiment에는 없는 커밋"을 의미한다. 여기에서는 설명을 쉽게 하려고 실제 조회 결과가 아니라 그림 6-1의 문자를 사용한다:</p>
+<p>experiment 브랜치의 커밋들 중에서 아직 master 브랜치에 Merge하지 않은 것들만 보고 싶으면 <code>master..experiment</code>라고 사용한다. 이 표현은 "master에는 없지만, experiment에는 있는 커밋"을 의미한다. 여기에서는 설명을 쉽게 하려고 실제 조회 결과가 아니라 그림 6-1의 문자를 사용한다:</p>
 
 <pre><code>$ git log master..experiment
 D
@@ -4746,7 +4733,7 @@ f3cc40e changed my name a bit
 
 <h4>모든 커밋에서 파일을 제거하기</h4>
 
-<p>갑자기 누군가 생각 없이 <code>git add.</code> 같은 명령어를 실행해 버려서 공룡 똥 덩어리가 커밋됐거나 실수로 암호가 포함된 파일을 커밋해서 이런 파일들을 다시 삭제해야 하는 상황을 살펴보자. 이런 상황은 생각보다 자주 발생한다. <code>filter-branch</code>는 히스토리 전체에서 필요한 것만 골라내는 데 사용하는 도구다. <code>filter-branch</code>의 <code>--tree-filter</code>라는 옵션을 사용하면 히스토리에서 passwords.txt라는 파일을 아예 제거할 수 있다:</p>
+<p>갑자기 누군가 생각 없이 <code>git add .</code> 같은 명령어를 실행해 버려서 공룡 똥 덩어리가 커밋됐거나 실수로 암호가 포함된 파일을 커밋해서 이런 파일들을 다시 삭제해야 하는 상황을 살펴보자. 이런 상황은 생각보다 자주 발생한다. <code>filter-branch</code>는 히스토리 전체에서 필요한 것만 골라내는 데 사용하는 도구다. <code>filter-branch</code>의 <code>--tree-filter</code>라는 옵션을 사용하면 히스토리에서 passwords.txt라는 파일을 아예 제거할 수 있다:</p>
 
 <pre><code>$ git filter-branch --tree-filter 'rm -f passwords.txt' HEAD
 Rewrite 6b9b3cf04e7c5686a9cb838c3f36a8cb6a0fc2bd (21/21)
@@ -4875,7 +4862,7 @@ f24d3c6ebcfc639b1a3814550e62d60b8e68a8e4 M  config
 <pre><code>$ git bisect reset
 </code></pre>
 
-<p>수백 개의 커밋들 중에서 버그가 만들어진 커밋을 찾는 데 몇 분밖에 걸리지 않는다. 실제 업무에서 사용할 때에는 자동화 스크립트가 필요하다. 자동화 스크립트는 이슈를 못 찾으면 0을 반환하고(<code>exit 0</code>) 찾으면 0이 아닌 값을 반환하는 스크립트이다. 먼저 <code>bisect start</code>명령으로 bisect를 사용할 범위를 알려준다. 위에서 한 것처럼 문제가 있다고 아는 커밋과 문제가 없다고 아는 커밋을 넘기면 된다:</p>
+<p>수백 개의 커밋들 중에서 버그가 만들어진 커밋을 찾는 데 몇 분밖에 걸리지 않는다. 프로젝트가 정상적으로 수행되면 0을 반환하고 문제가 있을 경우 1을 반환하는 스크립트를 만든다면, 이 <code>git bisect</code> 과정을 완전히 자동으로 수행할 수 있다. 먼저 <code>bisect start</code>명령으로 bisect를 사용할 범위를 알려준다. 위에서 한 것처럼 문제가 있다고 아는 커밋과 문제가 없다고 아는 커밋을 넘기면 된다:</p>
 
 <pre><code>$ git bisect start HEAD v1.0
 $ git bisect run test-error.sh
@@ -4885,7 +4872,7 @@ $ git bisect run test-error.sh
 
 <h2>서브모듈</h2>
 
-<p>프로젝트를 수행하다 보면 다른 프로젝트를 사용해야 하는 경우가 종종 있다. 보통 사용할 프로젝트들은 독립적으로 개발된 라이브러리들이다. 다시 말해서 별도의 프로젝트로 관리하면서 하나의 프로젝트처럼 취급할 수 있어야 한다.</p>
+<p>프로젝트를 수행하다 보면 다른 프로젝트를 사용해야 하는 경우가 종종 있다. 보통 사용할 프로젝트들은 독립적으로 개발된 라이브러리들이다. 이런 상황에서 자주 생기는 이슈는, 두 프로젝트를 서로 별개로 다루면서도 그 중 하나를 다른 하나 안에서 사용할 수 있어야 한다는 것이다.</p>
 
 <p>Atom 피드를 제공하는 웹사이트를 만든다고 가장하자. Atom 피드를 생성하는 코드는 직접 작성하지 않고 라이브러리를 가져다 쓰기로 했다. 그러면 CPAN이나 Ruby gem 같은 라이브러리 관리 도구를 사용하거나 해당 소스코드를 프로젝트로 복사해야 한다. 사실 라이브러리를 조금 수정하는 것, 설치하기 모두 어렵지만, 사용자들은 모두 이용할 수 있어야 한다. 그래서 프로젝트에 코드를 포함하고 코드를 수정하면 원래 라이브러리 프로젝트의 코드와 Merge하기 어렵게 된다.</p>
 
@@ -5103,7 +5090,7 @@ $ git status
 #      rack/
 </code></pre>
 
-<p>서브모듈 디렉토리를 다른 곳에 옮겨두거나 삭제해야 한다. 그리고 나중에 서브모듈이 있는 브랜치로 돌아가서 복원한다. 만약 다시 Clone하면 아직 Push하지 않은 내용이나 브랜치를 잃게 되니 조심해야 한다.</p>
+<p>서브모듈 디렉토리를 다른 곳에 옮겨 두거나 삭제해야 한다. 삭제할 경우는 원래 브랜치로 돌아왔을 때 서브모듈을 다시 Clone해야 하고, 이 경우 아직 Push하지 않았던 변경사항이나 브랜치를 잃을 수 있다.</p>
 
 <p>rack이라는 디렉토리가 있고 이것을 서브모듈로 바꾸려고 한다고 가정하자. 먼저 rack 디렉토리를 삭제하고 <code>submodule add</code>를 실행하면 Git은 다음과 같은 에러를 뱉는다:</p>
 
@@ -5426,7 +5413,7 @@ $ git config --global diff.external extDiff
 
 <p>diff 결과가 터미널에 출력되는 대신 P4Merge가 실행된다. 그리고 그림 7-1처럼 그 프로그램 안에서 보여준다:</p>
 
-<p><img src="figures/18333fig0701-tn.png" title="7-1. P4Merge." alt="7-1. P4Merge." /></p>
+<p><img src="figures/18333fig0701-tn.png" title="7-1. P4Merge." alt="7-1. P4Merge." /><br /><span class="image-title" style="font-weight:bold;">7-1. P4Merge.</span></p>
 
 <p>브랜치를 Merge할 때 충돌이 나면 <code>git mergetool</code> 명령을 실행한다. 이 명령을 실행하면 GUI 도구로 충돌을 해결할 수 있도록 P4Merge를 실행해준다.</p>
 
@@ -5558,6 +5545,8 @@ $ git config --global diff.external extDiff
 
 <p>Git 1.6부터 바이너리 파일도 diff할 수 있게 됐다. 이 Attribute는 Git이 바이너리 파일을 텍스트 포맷으로 변환하고 그 결과를 diff로 비교하도록 하는 것이다.</p>
 
+<h5>MS Word 파일</h5>
+
 <p>이 Attribute는 잘 알려지진 않았지만 끝내준다. 이 Attribute가 유용한 예제를 하나 살펴보자. 먼저 이 기술을 인류에게 알려진 가장 귀찮은 문제 중 하나인 Word 문서를 버전 관리하는 상황을 살펴보자. 모든 사람이 Word가 가장 끔찍한 편집기라고 말하지만 애석하게도 모두 Word를 사용한다. Git 저장소에 넣고 이따금 커밋하는 것만으로도 Word 문서의 버전을 관리할 수 있다. 그렇지만 <code>git diff</code>를 실행하면 다음과 같은 메시지를 볼 수 있을 뿐이다:</p>
 
 <pre><code>$ git diff 
@@ -5575,6 +5564,16 @@ Binary files a/chapter1.doc and b/chapter1.doc differ
 
 <pre><code>$ git config diff.word.textconv strings
 </code></pre>
+
+<p>위의 명령은 다음과 같은 내용을 <code>.git/config</code> 파일에 추가한다:</p>
+
+<pre><code>[diff "word"]
+    textconv = strings
+</code></pre>
+
+<p>Side note: There are different kinds of <code>.doc</code> files. Some use an UTF-16 encoding or other "codepages" and <code>strings</code> won't find anything useful in there. Your mileage may vary.</p>
+
+<p>덧붙이는 말: <code>.doc</code> 파일의 종류는 여러가지이다. UTF-16 인코딩을 쓰거나 "codepages" 기반(역주: 한글은 Codepage 949) 인코딩을 사용 할 수도 있다. <code>strings</code>로는 아무런 유용한 정보를 찾아낼 수 없을지도 모른다.</p>
 
 <p>이제 Git은 확장자가 <code>.doc</code>인 파일의 스냅샷을 diff할 때 "word" 필터로 정의한 <code>strings</code> 프로그램을 사용한다. 이 프로그램은 Word 파일을 텍스트 파일로 변환해 주기 때문에 diff할 수 있다.</p>
 
@@ -5595,6 +5594,62 @@ index c1c8a0a..b93c9e4 100644
 </code></pre>
 
 <p>Git은 "Let's see if this works"가 추가됐다는 것을 정확하게 찾아 준다. 이것은 완벽하지는 않지만(마지막에 아무거나 왕창 집어넣지만 않으면) 어쨌든 잘 동작한다. 이 방법은 Word 문서를 텍스트로 더 잘 변환하는 프로그램이 있으면 좀 더 완벽해질 수 있다. Mac이나 Linux 같은 시스템에는 <code>strings</code>가 이미 설치되어 있기 때문에 당장 사용할 수 있다.</p>
+
+<h5>OpenDocument 파일</h5>
+
+<p>MS Word(<code>*.doc</code>) 파일에 사용한 방법과 마찬가지로 OpenOffice.org(혹은 LibreOffice.org) 파일 형식인 OpenDocument(<code>*.odt</code>) 파일도 적용할 수 있다.</p>
+
+<p>아래의 내용을 <code>.gitattributes</code> 파일에 추가한다:</p>
+
+<pre><code>*.odt diff=odt
+</code></pre>
+
+<p><code>.git/config</code> 파일에 <code>odt</code> diff 필터를 설정한다:</p>
+
+<pre><code>[diff "odt"]
+    binary = true
+    textconv = /usr/local/bin/odt-to-txt
+</code></pre>
+
+<p>OpenDocument 파일은 사실 여러 파일(텍스트, 형식, 스타일, 이미지 등등)이 Zip으로 압축된 형식이다. OpenDocument 파일에서 텍스트만 추출하는 스크립트를 하나 작성해보자. 파일은 다음과 같은 내용을 <code>/usr/local/bin/odt-to-txt</code>으로(다른 위치에 저장해도 상관없다) 저장한다:</p>
+
+<pre><code>#! /usr/bin/env perl
+# Simplistic OpenDocument Text (.odt) to plain text converter.
+# Author: Philipp Kempgen
+
+if (! defined($ARGV[0])) {
+    print STDERR "No filename given!\n";
+    print STDERR "Usage: $0 filename\n";
+    exit 1;
+}
+
+my $content = '';
+open my $fh, '-|', 'unzip', '-qq', '-p', $ARGV[0], 'content.xml' or die $!;
+{
+    local $/ = undef;  # slurp mode
+    $content = &lt;$fh&gt;;
+}
+close $fh;
+$_ = $content;
+s/&lt;text:span\b[^&gt;]*&gt;//g;           # remove spans
+s/&lt;text:h\b[^&gt;]*&gt;/\n\n*****  /g;   # headers
+s/&lt;text:list-item\b[^&gt;]*&gt;\s*&lt;text:p\b[^&gt;]*&gt;/\n    --  /g;  # list items
+s/&lt;text:list\b[^&gt;]*&gt;/\n\n/g;       # lists
+s/&lt;text:p\b[^&gt;]*&gt;/\n  /g;          # paragraphs
+s/&lt;[^&gt;]+&gt;//g;                      # remove all XML tags
+s/\n{2,}/\n\n/g;                   # remove multiple blank lines
+s/\A\n+//;                         # remove leading blank lines
+print "\n", $_, "\n\n";
+</code></pre>
+
+<p>그리고 실행 가능하도록 만든다.</p>
+
+<pre><code>chmod +x /usr/local/bin/odt-to-txt
+</code></pre>
+
+<p>이제 <code>git diff</code> 명령으로 <code>.odt</code> 파일에 대한 변화를 살펴볼 수 있다.</p>
+
+<h5>이미지 파일</h5>
 
 <p>이 방법으로 이미지 파일도 diff할 수 있다. 필터로 EXIF 정보를 추출해서 JPEG 파일을 비교한다. EXIF 정보는 대부분의 이미지 파일에 들어 있는 메타데이터다. <code>exiftool</code>이라는 프로그램을 설치하고 이미지 파일에서 메타데이터 텍스트를 추출한다. 그리고 그 결과를 diff해서 무엇이 달라졌는지 본다:</p>
 
@@ -5648,9 +5703,9 @@ $Id: 42812b7653c7b88933f8a9d6cad0ca16714b9bb3 $
 
 <p>Commit/Checkout할 때 사용할 필터를 직접 만들어 쓸 수 있는데, 방향에 따라 "clean" 필터와 "smudge" 필터라고 부른다. ".gitattributes" 파일에 파일 경로마다 다른 필터를 설정할 수 있다. Checkout할 때 파일을 처리하는 것이 "smudge" 필터이고(그림 7-2) 커밋할 때 처리하는 필터가 "clean" 필터이다. 이 필터로 할 수 있는 일은 무궁무진하다.</p>
 
-<p><img src="figures/18333fig0702-tn.png" title="7-2. &quot;smudge&quot; 필터는 Checkout할 때 실행된다." alt="7-2. &quot;smudge&quot; 필터는 Checkout할 때 실행된다." /></p>
+<p><img src="figures/18333fig0702-tn.png" title="7-2. &quot;smudge&quot; 필터는 Checkout할 때 실행된다." alt="7-2. &quot;smudge&quot; 필터는 Checkout할 때 실행된다." /><br /><span class="image-title" style="font-weight:bold;">7-2. "smudge" 필터는 Checkout할 때 실행된다.</span></p>
 
-<p><img src="figures/18333fig0703-tn.png" title="7-3. &quot;clean&quot; 필터는 파일을 Stage할 때 실행된다." alt="7-3. &quot;clean&quot; 필터는 파일을 Stage할 때 실행된다." /></p>
+<p><img src="figures/18333fig0703-tn.png" title="7-3. &quot;clean&quot; 필터는 파일을 Stage할 때 실행된다." alt="7-3. &quot;clean&quot; 필터는 파일을 Stage할 때 실행된다." /><br /><span class="image-title" style="font-weight:bold;">7-3. "clean" 필터는 파일을 Stage할 때 실행된다.</span></p>
 
 <p>커밋하기 전에 <code>indent</code> 프로그램으로 C 코드 전부를 필터링하지만 커밋 메시지는 단순한 예제를 보자. <code>*.c</code> 파일은 indent 필터를 사용하도록 <code>.gitattributes</code> 파일에 설정한다:</p>
 
@@ -6374,7 +6429,7 @@ Nothing to do.
 
 <p>이 부분이 왜 중요하냐면 Push하고 난 프로젝트 상태가 Push하기 이전의 상태와 같지 않다는 것이다. 충돌은 없고 변경사항이 원하는 대로 적용되지 않을 때 제대로 코드를 확인할 수 없다. 이러한 부분이 Git과 다른점인데 Git에서는 서버로 보내기 전에 프로젝트 코드의 모든 상태를 테스트할 수 있다. SVN은 서버로 커밋하기 전과 후의 상태가 동일하다는 것을 확신할 수 없다.</p>
 
-<p><code>git svn rebase</code> 명령으로도 Subversion 서버로부터 변경사항을 가져오는데 사요할 수 있다. 커밋을 보낼 준비가 되지 않았다 해도 말이다. <code>git svn fetch</code> 명령을 사용할 수도 있지만 <code>git svn rebase</code> 명령은 변경사항을 가져오고 적용까지 한 번에 해준다.</p>
+<p><code>git svn rebase</code> 명령으로도 Subversion 서버로부터 변경사항을 가져오는데 사용할 수 있다. 커밋을 보낼 준비가 되지 않았다 해도 말이다. <code>git svn fetch</code> 명령을 사용할 수도 있지만 <code>git svn rebase</code> 명령은 변경사항을 가져오고 적용까지 한 번에 해준다.</p>
 
 <pre><code>$ git svn rebase
        M      generate_descriptor_proto.sh
@@ -6633,8 +6688,6 @@ $ cd git/contrib/fast-import
 <pre><code>$ export P4PORT=public.perforce.com:1666
 </code></pre>
 
-<p>Run the <code>git-p4 clone</code> command to import the Jam project from the Perforce server, supplying the depot and project path and the path into which you want to import the project:</p>
-
 <p><code>git-p4 clone</code> 명령으로 Perforce 서버에서 Jam 프로젝트를 가져온다. 이 명령에 Depot, 프로젝트 경로, 프로젝트를 가져올 경로를 주면 된다:</p>
 
 <pre><code>$ git-p4 clone //public/jam/src@all /opt/p4import
@@ -6747,8 +6800,6 @@ def convert_dir_to_mark(dir)
   ($marks.index(dir) + 1).to_s
 end
 </code></pre>
-
-<p>Now that you have an integer representation of your commit, you need a date for the commit metadata. Because the date is expressed in the name of the directory, you’ll parse it out. The next line in your <code>print_export</code> file is</p>
 
 <p>각 커밋을 가리키는 정수 Mark를 만들었고 다음은 커밋 메타데이터에 넣을 날짜 정보가 필요하다. 이 날짜는 디렉토리 이름에 있는 것을 가져다 사용한다. <code>print_export</code>의 두 번째 줄은 다음과 같다:</p>
 
@@ -6950,7 +7001,7 @@ objects/
 refs/
 </code></pre>
 
-<p>파일이 몇 개 있으니 완전히 빈 디렉토리는 아니지만 <code>git init</code>을 하고 난 직후는 저장소가 거의 비워져 있다. <code>branches</code> 디렉토리는 Git의 예전 버전에서만 사용하고 <code>description</code> 파일은 기본적으로 GitWeb 프로그램에서만 사용하기 때문에 이 둘은 무시해도 된다. <code>config</code> 파일에는 해당 프로젝트에만 적용되는 설정 옵션이 들어 있고, <code>info</code> 디렉토리는 .gitignore 파일처럼 무시할 파일의 패턴을 적어 두는 곳이다. 하지만 .gitignore 파일과는 달리 Git으로 관리되지 않는다. <code>hook</code> 디렉토리에는 클라이언트 훅이나 서버 훅을 넣는다. 관련 내용은 7장에서 다루었다.</p>
+<p>기본적으로 이것이 <code>git init</code>을 한 직후에 보이는 새 저장소의 모습이고, 이 외에 다른 파일들이 더 있을 수 있다. <code>branches</code> 디렉토리는 Git의 예전 버전에서만 사용하고 <code>description</code> 파일은 기본적으로 GitWeb 프로그램에서만 사용하기 때문에 이 둘은 무시해도 된다. <code>config</code> 파일에는 해당 프로젝트에만 적용되는 설정 옵션이 들어 있고, <code>info</code> 디렉토리는 .gitignore 파일처럼 무시할 파일의 패턴을 적어 두는 곳이다. 하지만 .gitignore 파일과는 달리 Git으로 관리되지 않는다. <code>hook</code> 디렉토리에는 클라이언트 훅이나 서버 훅을 넣는다. 관련 내용은 7장에서 다루었다.</p>
 
 <p>이제 남은 네 가지 항목은 모두 중요한 항목이다. <code>HEAD</code>와 <code>index</code> 파일, <code>objects</code>와 <code>refs</code> 디렉토리가 남았다. 이 네 항목이 Git의 핵심이다. <code>objects</code> 디렉토리는 모든 컨텐트를 저장하는 데이터베이스이고 <code>refs</code> 디렉토리에는 Commit 개체의 포인터를 저장한다. <code>HEAD</code> 파일은 현재 Checkout한 브랜치를 가리키고 <code>index</code> 파일은 Staging Area의 정보를 저장한다. 이 네 가지 항목을 자세히 살펴보면 Git이 어떻게 동작하는지 알게 된다.</p>
 
@@ -7050,8 +7101,7 @@ blob
 
 <p>Git이 저장하는 데이터는 대강 그림 9-1과 같다.</p>
 
-<p>Insert 18333fig0901.png
-Figure 9-1. 단순화한 Git 데이터 모델.</p>
+<p><img src="figures/18333fig0901-tn.png" title="9-1. 단순화한 Git 데이터 모델." alt="9-1. 단순화한 Git 데이터 모델." /><br /><span class="image-title" style="font-weight:bold;">9-1. 단순화한 Git 데이터 모델.</span></p>
 
 <p>직접 Tree 개체를 만들어 보자. Git은 일반적으로 Staging Area(Index)의 상태대로 Tree 개체를 만들고 기록한다. 그래서 Tree 개체를 만들려면 Staging Area에 파일을 추가해서 Index를 만들어 줘야 한다. 우선 Plumbing 명령 <code>update-index</code>로 <code>test.txt</code> 파일만 들어 있는 Index를 만든다. 이 명령으로 test.txt 파일을 인위적으로 Staging Area에 추가하는 것이다. 아직 Staging Area에 없는 파일이기 때문에 <code>--add</code> 옵션을 꼭 줘야 한다(사실 아직 Staging Area도 설정하지 않았다). 그리고 디렉토리에 있는 파일이 아니라 데이터베이스에만 있는 파일을 추가하는 것이기 때문에 <code>--cacheinfo</code> 옵션이 필요하다. 그리고 파일 모드, SHA-1 해시, 파일 이름을 지정해준다:</p>
 
@@ -7104,8 +7154,7 @@ $ git cat-file -p 3c4e9cd789d88d8d89c1073707c3585e41b0e614
 
 <p>지금 만든 Tree 개체로 Working Directory를 만들면 파일이 두 개와 <code>bak</code>이라는 하위 디렉토리가 있을 것이다. 그리고 <code>bak</code> 디렉토리 안에는 test.txt 파일의 처음 버전이 들어 있다. Git은 그림 9-2와 같은 구조로 데이터를 저장한다고 생각하면 된다.</p>
 
-<p>Insert 18333fig0902.png
-Figure 9-2. Git 데이터 구조.</p>
+<p><img src="figures/18333fig0902-tn.png" title="9-2. Git 데이터 구조." alt="9-2. Git 데이터 구조." /><br /><span class="image-title" style="font-weight:bold;">9-2. Git 데이터 구조.</span></p>
 
 <h3>Commit 개체</h3>
 
@@ -7186,8 +7235,7 @@ Date:   Fri May 22 18:09:34 2009 -0700
 
 <p>내부의 포인터를 따라가면 그림 9-3과 같은 그래프가 그려진다.</p>
 
-<p>Insert 18333fig0903.png
-Figure 9-3. Git 저장소 내의 모든 개체.</p>
+<p><img src="figures/18333fig0903-tn.png" title="9-3. Git 저장소 내의 모든 개체." alt="9-3. Git 저장소 내의 모든 개체." /><br /><span class="image-title" style="font-weight:bold;">9-3. Git 저장소 내의 모든 개체.</span></p>
 
 <h3>개체 저장소</h3>
 
@@ -7268,7 +7316,7 @@ fdf4fc3344e67ab068f836878b6c4951e3b15f3d first commit
 <pre><code>$ git update-ref refs/heads/master 1a410efbd13591db07496601ebc7a059dd55cfe9
 </code></pre>
 
-<p>Git의 브랜치는 아주 단순한 포인터일 뿐인다. 기본적으로 하는 일을 가리키는 레퍼런스다. 간단히 두 번째 커밋을 가리키는 브랜치를 만들어 보자:</p>
+<p>Git의 브랜치의 역할이 바로 이것이다: 브랜치는 일련의 작업들의 헤드를 참조하는 포인터 또는 레퍼런스이다. 간단히 두 번째 커밋을 가리키는 브랜치를 만들어 보자:</p>
 
 <pre><code>$ git update-ref refs/heads/test cac0ca
 </code></pre>
@@ -7282,8 +7330,7 @@ fdf4fc3344e67ab068f836878b6c4951e3b15f3d first commit
 
 <p>이제 Git 데이터베이스는 그림 9-4처럼 보인다.</p>
 
-<p>Insert 18333fig0904.png
-Figure 9-4. 브랜치 레퍼런스가 추가된 Git 데이터베이스</p>
+<p><img src="figures/18333fig0904-tn.png" title="9-4. 브랜치 레퍼런스가 추가된 Git 데이터베이스" alt="9-4. 브랜치 레퍼런스가 추가된 Git 데이터베이스" /><br /><span class="image-title" style="font-weight:bold;">9-4. 브랜치 레퍼런스가 추가된 Git 데이터베이스</span></p>
 
 <p><code>git branch (branchname)</code> 명령을 실행하면 Git은 내부적으로 <code>update-ref</code> 명령을 실행한다. 입력받은 브랜치 이름과 현 브랜치의 마지막 커밋에서 SHA-1 값을 가져다 <code>update-ref</code> 명령을 실행하는 것이다.</p>
 
@@ -8003,4 +8050,9 @@ garbage: 0
 <p>Git이 내부적으로 어떻게 동작하는지 잘 이해하였으며 어떻게 구현됐는지까지 꽤 알게 됐을 것이다. 이 장은 저수준 명령어인 Plumbing 명령어들을 설명했다. 다른 장에서 우리가 배웠던 Porcelain 명령어보다는 단순하다. Git이 내부적으로 어떻게 동작하는지 알면 Git이 왜 그렇게 하는가를 더 쉽게 이해할 수 있을 뿐만 아니라 개인적으로 필요한 도구나 스크립트를 만들어 자신의 Workflow를 개선할 수 있다.</p>
 
 <p>Git은 Content-addressble 파일 시스템이기 때문에 VCS 이상의 일을 할 수 있는 매우 강력한 도구다. 필자는 독자가 새로 배운 Git 내부에 대한 지식을 활용해서 필요한 애플리케이션을 만들었으면 좋겠다. 그리고 진정 Git을 꼼꼼하고 디테일하게 다룰 수 있게 되길 바란다.</p>
+<h1>번역</h1>
+
+<p>안녕하세요. 한국어 번역은 박창우(pismute@gmail.com), 이성환(lethee@gmail.com)이 하였습니다. 오역 등의 개선 사항은 역자의 메일로 보내주시거나 한국어 번역 게시판에 <code>https://github.com/dogfeet/progit/issues</code>에 남겨주시기 바랍니다. 직접 개선해서 패치나 Pull Request를 보내주셔도 됩니다.</p>
+
+<p>여러분 모두 Git으로 힘내시기 바랍니다.</p>
 </body></html>
